@@ -1,4 +1,4 @@
-public class Arrays {
+public class ArraysDemo {
     public static void main(String[] args) {
         int[] arr1 = new int[] {1,2,3};
         int[] arr2 = new int[] {1,2,3};
@@ -37,5 +37,16 @@ public class Arrays {
             }
         }
         return true;
+    }
+
+    /**
+     * Searches for the minimal value in the given array.
+     *
+     * @param arr Array.
+     * @return Minimal value.
+     * @throws AssertionError if array is empty or null.
+     */
+    static int getMinValue(int[] arr) {
+        return -1;//replace with your code.
     }
 }
