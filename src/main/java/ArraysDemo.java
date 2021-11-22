@@ -64,4 +64,15 @@ public class ArraysDemo {
         }
         return minValue;
     }
+
+    /**
+     * Searches given array for first two numbers which sum is equals to the expected.
+     *
+     * @param arr Nullable array.
+     * @param expectedSum Expected sum.
+     * @return Array of size of 2 ordered <b>indexes</b> in {@code arr}, which yield in expected sum, {@code null} if no solution here.
+     */
+    static int[] findExactSumOfTwoElements(int[] arr, int expectedSum) {
+        return null;// place your code.
+    }
 }
