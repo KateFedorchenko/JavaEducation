@@ -34,6 +34,36 @@ public class Arrays2D {
         //создать лестничный массив заданного размера
     }
 
+    /**
+     * Traverses given 2D array in the left-growing spiral way starting from most upper-left element
+     * and writes into plain array in that order.
+     * e.g.
+     * | 1 2 3 |
+     * | 4 5 6 | -> | 1 2 3 6 9 8 7 4 5|
+     * | 7 8 9 |
+     *
+     * @param arr2d Non-null two-dimensional rectangle array with non-null elements.
+     * @return One-dimensional array.
+     */
+    static int[] arraySpiralTraverse(int[][] arr2d) {
+        return new int[0];
+    }
+
+    /**
+     * Traverses given 2D array in `snake` way starting from most upper-left element
+     * and writes into plain array in that order.
+     * e.g.
+     *
+     * | 1 2 3 |
+     * | 4 5 6 | -> | 1 2 3 6 5 4 7 8 9|
+     * | 7 8 9 |
+     *
+     * @param arr2d Non-null two-dimensional rectangle array with non-null elements.
+     * @return One-dimensional array;
+     */
+    static int[] arraySnakeTraverse(int[][] arr2d) {
+        return new int[0];
+    }
 
 }
 
