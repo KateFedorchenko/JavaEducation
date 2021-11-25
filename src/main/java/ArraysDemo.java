@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class ArraysDemo {
     public static void main(String[] args) {
-        int[] arr1 = new int[] {1,2,0};
+        int[] arr1 = new int[] {42,42};
         int[] arr2 = new int[] {1,0,3};
         int[] arr3 = new int[] {1,2,3,4,5};
         int[] arr4 = new int[] {1,2,4};
@@ -14,7 +14,7 @@ public class ArraysDemo {
        // System.out.println("getMinValue(arr1) = " + getMinValue(arr1));
        // System.out.println("getMinValue(arr2) = " + getMinValue(arr2));
        // System.out.println("getMinValue(arr3) = " + getMinValue(arr3));
-        System.out.println("findExactSumOfTwoElements(arr1,3) = " + findExactSumOfTwoElements(arr1, 3));
+        System.out.println("findExactSumOfTwoElements(arr1,3) = " + findExactSumOfTwoElements(arr1, 84));
 
 
     }
@@ -75,21 +75,25 @@ public class ArraysDemo {
      * @param expectedSum Expected sum.
      * @return Array of size of 2 ordered <b>indexes</b> in {@code arr}, which yield in expected sum, {@code null} if no solution here.
      */
-   // int[] arr1 = new int[] {1,2,0,3};
 
     static int[] findExactSumOfTwoElements(int[] arr, int expectedSum) {
-        for(int i=0; i<arr.length-1; i++) {
-            for(int j=0; j<arr.length; j++) {                  // не сразу пришло осознанение о внутреннем цикле
-                if (arr[i] + arr[j] == expectedSum) {
-                    int[] result = {i,j};
-                    return result;                      // не знаю, как сделать, чтобы возвращался читаемый массив
-
-                    //System.out.println(Arrays.toString(result));
-                    //break;
-                 }
+        if(arr.length == 0) {
+            return null;
+        } else {
+            /*for(int i=0; i<arr.length; i++) {
+                if(arr[i] == null) {             // 1) Что делать с пустыми значениями? 2) Int не может иметь значение null. Почему?
+                    return null;
+                }
+            }*/
+            for(int i=0; i<arr.length-1; i++) {
+                for(int j=1; j<arr.length; j++) {
+                    if (arr[i] + arr[j] == expectedSum) {
+                        return new int[]{i,j};
+                    }
+                }
             }
         }
-        return null;
+        return new int[]{};  // здесь же надо возвращать тот типа данных, который указываем в инициализации функции? int[]
     }
 
 
