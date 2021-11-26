@@ -77,23 +77,24 @@ public class ArraysDemo {
      */
 
     static int[] findExactSumOfTwoElements(int[] arr, int expectedSum) {
-        if(arr.length == 0) {
+        if(arr == null || arr.length < 2) {
             return null;
         } else {
-            /*for(int i=0; i<arr.length; i++) {
-                if(arr[i] == null) {             // 1) Что делать с пустыми значениями? 2) Int не может иметь значение null. Почему?
+            if(arr.length == 2) {
+                if (arr[0] + arr[1] != expectedSum) {
                     return null;
                 }
-            }*/
+            }
             for(int i=0; i<arr.length-1; i++) {
                 for(int j=1; j<arr.length; j++) {
                     if (arr[i] + arr[j] == expectedSum) {
                         return new int[]{i,j};
                     }
+
                 }
             }
         }
-        return new int[]{};  // здесь же надо возвращать тот типа данных, который указываем в инициализации функции? int[]
+        return new int[0];
     }
 
 

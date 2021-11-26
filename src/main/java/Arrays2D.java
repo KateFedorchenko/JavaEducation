@@ -67,23 +67,20 @@ public class Arrays2D {
    // int[][] arr2d = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
 
     static int[] arraySnakeTraverse(int[][] arr2d) {
-        //int[] arr = new int[]{};
+        int x = 0;
+        int[] res = new int[arr2d[0].length + arr2d[1].length+arr2d[2].length]; // а если я не знаю, какого размера мне нужен массив?
         for(int i = 0; i<arr2d.length;i++) {
             if(i % 2 == 0) {
                 for(int j = 0; j<arr2d[i].length; i++) {
-                    //arr = new int[]{j};                         // не понимаю, как значения многомерного массива присвоить другому одномерноиу массиву
-
-                    //System.out.println(arr2d[i][j]);
+                    res[x++] = arr2d[i][j];
                 }
             } else {
                 for(int j = arr2d[i].length-1; j>=0; j--) {
-                    // arr = new int[]{j};
-
-                    //System.out.println(arr2d[i][j]);
+                    res[x++] = arr2d[i][j];
                 }
             }
         }
-        return new int[]{};
+        return res;             // не работает функция. Почему?
     }
 }
 
