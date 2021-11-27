@@ -67,11 +67,14 @@ public class Arrays2D {
    // int[][] arr2d = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
 
     static int[] arraySnakeTraverse(int[][] arr2d) {
+        if(arr2d.length == 0) {
+            return new int[0];
+        }
         int x = 0;
-        int[] res = new int[arr2d[0].length + arr2d[1].length+arr2d[2].length]; // а если я не знаю, какого размера мне нужен массив?
+        int[] res = new int[arr2d.length*arr2d[0].length];
         for(int i = 0; i<arr2d.length;i++) {
             if(i % 2 == 0) {
-                for(int j = 0; j<arr2d[i].length; i++) {
+                for(int j = 0; j<arr2d[i].length; j++) {
                     res[x++] = arr2d[i][j];
                 }
             } else {
@@ -80,7 +83,7 @@ public class Arrays2D {
                 }
             }
         }
-        return res;             // не работает функция. Почему?
+        return res;
     }
 }
 
