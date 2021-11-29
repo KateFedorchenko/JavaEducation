@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class ArraysAdvancedDemo {
     public static void main(String[] args) {
        // int[] arr = new int[]{-10,-9,-8,-7,-6,-5,-3,-1,0,8};
@@ -43,5 +45,18 @@ public class ArraysAdvancedDemo {
             }
         }
         return arr;
+    }
+
+    /**
+     * Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+     *
+     * For additional difficulty:
+     * You must implement a solution with a linear runtime complexity and use only constant extra space.
+     *
+     * @param arr Array of numbers;
+     * @return Single element;
+     */
+    public static int findSingleNumber(int[] arr) {
+        return 0;
     }
 }
