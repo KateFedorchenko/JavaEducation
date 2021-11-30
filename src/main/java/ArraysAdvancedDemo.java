@@ -1,12 +1,17 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ArraysAdvancedDemo {
     public static void main(String[] args) {
        // int[] arr = new int[]{-10,-9,-8,-7,-6,-5,-3,-1,0,8};
         //int res = binarySearch(arr, 0, arr.length, -2);
         //System.out.println(res);
-        int[] arr2 = new int[]{2,1};
-        swapBubble(arr2);
+        int[] arr2 = new int[]{2,1,3};
+        //swapBubble(arr2);
+        //int[] arr3 = new int[]{1,2,1,2,3,4,3};
+        //System.out.println("findSingleNumber(arr3) = " + findSingleNumber(arr3));
+        System.out.println("insertionSorting(arr2) = " + insertionSorting(arr2));
+
     }
 
     static int binarySearch(int[] arr, int start, int end, int x) {
@@ -47,6 +52,24 @@ public class ArraysAdvancedDemo {
         return arr;
     }
 
+
+                                 /* Insertion Sorting */
+
+    static int[] insertionSorting(int[] arr) {   // not easy at the first glance
+        int currentElement;
+        int index;
+        for(int i =0; i<arr.length; i++) {
+            currentElement = arr[i];
+            index = i;
+            while(i>0 && arr[index-1] > currentElement) {
+                arr[index] = arr[index-1];
+                index--;
+            }
+            arr[index] = currentElement;
+        }
+        return arr;
+    }
+
     /**
      * Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
      *
@@ -57,6 +80,16 @@ public class ArraysAdvancedDemo {
      * @return Single element;
      */
     public static int findSingleNumber(int[] arr) {
-        return 0;
+        if(arr == null || arr.length == 0) {
+            return -1;
+        }
+        swapBubble(arr);
+        for (int i = 0; i < arr.length - 1; i += 2) {
+            if (arr[i] != arr[i + 1])
+                return arr[i];
+        }
+        return arr[arr.length - 1];  // why?
     }
+
+
 }
