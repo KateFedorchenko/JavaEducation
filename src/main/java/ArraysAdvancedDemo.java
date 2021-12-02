@@ -88,8 +88,9 @@ public class ArraysAdvancedDemo {
             if (arr[i] != arr[i + 1])
                 return arr[i];
         }
-        return arr[arr.length - 1];  // why?
+        return arr[arr.length - 1];
     }
+    // Тема: XOR побитовые операции над числами - & - И, | - ИЛИ, ^ - исключающее ИЛИ
 
 
 }

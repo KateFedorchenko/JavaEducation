@@ -13,7 +13,8 @@ class ArraysAdvancedDemoTest {
             arguments(new int[] {2,2,1}, 1),
             arguments(new int[] {0}, 0),
             arguments(new int[] {1}, 1),
-            arguments(new int[] {1,2,3,2,3}, 1)
+            arguments(new int[] {1,2,3,2,3}, 1),
+            arguments(new int[] {1,2,3,1,2}, 3)
         );
     }
 
