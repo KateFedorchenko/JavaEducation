@@ -1,3 +1,5 @@
+import java.util.Arrays
+
 public class Class1 {
     public static void main(String[] args) {
         //Book book = new Book("Book","Bob",1987,54);
@@ -5,13 +7,14 @@ public class Class1 {
         //print(book);
         //System.out.println("bookJava.isJavaBook() = " + bookJava.isJavaBook());
         //System.out.println("book.isJavaBook() = " + book.isJavaBook());
-        Meeting meeting = new Meeting("API Methods", "2021-12-02 23:23:32", 23, true);
+        Meeting meeting = new Meeting("API Methods", 2021-12-02 ,23, true);
         System.out.println("meeting.isTopicAboutAPI() = " + meeting.isTopicAboutAPI());
         System.out.println("meeting.isOnline() = " + meeting.isOnline());
 
         Car lada = new Car("Lada", 10, "Black");
         System.out.println("lada.isOld() = " + lada.isOld());
         System.out.println("lada.isColorBlack() = " + lada.isColorBlack());
+        System.out.println("lada.timeLeftForUse() = " + lada.timeLeftForUse());
         Car bmw = new Car("BMW", 40, "Red");
         System.out.println("bmw.isOld() = " + bmw.isOld());
         System.out.println("bmw.isColorBlack() = " + bmw.isColorBlack());
@@ -22,6 +25,16 @@ public class Class1 {
         Phone iphone = new Phone("iPhone", 1, true, true);
         System.out.println("iphone.isPhoneOkForUse() = " + iphone.isPhoneOkForUse());
         System.out.println("iphone.isIphone() = " + iphone.isIphone());
+        System.out.println("iphone.nextSteps() = " + iphone.nextSteps());
+        System.out.println("samsung.nextSteps() = " + samsung.nextSteps());
+
+
+        MinMaxValueHolder holder = new MinMaxValueHolder(new int[]{1,2}); //  how to insert arr??
+        holder.push(10);
+        holder.push(22);
+        holder.min();
+        holder.max();
+
     }
 
     static void print(Book book) {
@@ -51,15 +64,15 @@ public class Class1 {
 
     public static class Meeting {
         String topic;
-        String timeOfStart;
+        long timeOfStart;
         int numOfParticipants;
-        boolean online;
+        boolean isOnline;
 
-        public Meeting(String topic_, String timeOfStart_, int numOfParticipants_, boolean online_) {
+        public Meeting(String topic_, long timeOfStart_, int numOfParticipants_, boolean isOnline_) {
             topic = topic_;
             timeOfStart = timeOfStart_;
             numOfParticipants = numOfParticipants_;
-            online = online_;
+            isOnline = isOnline_;
         }
 
         public boolean isTopicAboutAPI() {
@@ -90,11 +103,25 @@ public class Class1 {
 
         public String isColorBlack() {
             if (color.contains("Black")) {
-                return "The color is ok";   // why cannot I put here System.out.println() ? It throws the exception.
+                return "The color is ok";
             }
             else {
                 return "Please, change the color!";
             }
+        }
+
+        public int timeLeftForUse(){           // The method returns INT type
+            int time = 0;
+            if(color == "Black") {
+                time = 2;
+                if(name == "Lada") {
+                    time-=1;
+                }
+            }
+            if(color == "Red") {
+                time = 5;
+            }
+            return time;
         }
 
     }
@@ -127,6 +154,14 @@ public class Class1 {
             return name.contains("iPhone");
         }
 
+        public String nextSteps(){            // The method returns String type
+            if(isActive != false){
+                return "Hello World!";
+            } else {
+                return null;
+            }
+        }
+
     }
 
     /**
@@ -143,9 +178,13 @@ public class Class1 {
      * holder.push(42);
      * holder.max(); // -> 42
      */
-    public static class MinMaxValueHolder {
-        // please implement methods.
-        // add necessary fields.
+    public static class MinMaxValueHolder {           // why problems?
+        int[] arr;
+
+
+       /* public MinMaxValueHolder (int[]arr_) {   // why is not allowed?
+            arr = arr_;
+        } */
 
         /**
          * Pushes new value into structure.
@@ -153,23 +192,29 @@ public class Class1 {
          * @param val Any integer;
          */
         public void push(int val) {
-
+            int[] result = Arrays.copyOf(arr, arr.length +1);
+            result[arr.length] = val;
         }
 
         /**
          * Returns minimal value ever pushed into structure.
          */
         public int min() {
-            return 0;
+            Arrays.sort(arr);
+            return arr[0];
         }
 
         /**
          * Returns maximal value ever pushed into structure.
          */
         public int max() {
-            return 0;
+            Arrays.sort(arr);
+            int lastElement = arr.length - 1;
+            return arr[lastElement];
         }
     }
 
 }
 
+
+// List<Integer> myList = new ArrayList<Integer>();   // what is it?? <>
