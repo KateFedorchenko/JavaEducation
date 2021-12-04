@@ -1,4 +1,4 @@
-import java.util.Arrays
+import java.util.Arrays;
 
 public class Class1 {
     public static void main(String[] args) {
@@ -29,11 +29,12 @@ public class Class1 {
         System.out.println("samsung.nextSteps() = " + samsung.nextSteps());
 
 
-        MinMaxValueHolder holder = new MinMaxValueHolder(new int[]{1,2}); //  how to insert arr??
+       /* MinMaxValueHolder holder = new MinMaxValueHolder(new int[]{1,2}); //  how to insert arr??
         holder.push(10);
         holder.push(22);
         holder.min();
-        holder.max();
+        holder.max();*/
+
 
     }
 
@@ -66,7 +67,7 @@ public class Class1 {
         String topic;
         long timeOfStart;
         int numOfParticipants;
-        boolean isOnline;
+        boolean isOnline;      //no dependencies ?!
 
         public Meeting(String topic_, long timeOfStart_, int numOfParticipants_, boolean isOnline_) {
             topic = topic_;
@@ -99,7 +100,7 @@ public class Class1 {
 
         public String isOld() {
             return age < 30 ? "The car is brand-new" : "The car is old";
-        }
+        } //seems like boolean type
 
         public String isColorBlack() {
             if (color.contains("Black")) {
@@ -112,7 +113,7 @@ public class Class1 {
 
         public int timeLeftForUse(){           // The method returns INT type
             int time = 0;
-            if(color == "Black") {
+            if(color == "Black") {           // color.equals("Black");
                 time = 2;
                 if(name == "Lada") {
                     time-=1;
@@ -178,13 +179,12 @@ public class Class1 {
      * holder.push(42);
      * holder.max(); // -> 42
      */
-    public static class MinMaxValueHolder {           // why problems?
-        int[] arr;
+    public static class MinMaxValueHolder {
+        int min;
+        int max;
 
 
-       /* public MinMaxValueHolder (int[]arr_) {   // why is not allowed?
-            arr = arr_;
-        } */
+
 
         /**
          * Pushes new value into structure.
@@ -192,25 +192,21 @@ public class Class1 {
          * @param val Any integer;
          */
         public void push(int val) {
-            int[] result = Arrays.copyOf(arr, arr.length +1);
-            result[arr.length] = val;
+
         }
 
         /**
          * Returns minimal value ever pushed into structure.
          */
         public int min() {
-            Arrays.sort(arr);
-            return arr[0];
+            return 0;
         }
 
         /**
          * Returns maximal value ever pushed into structure.
          */
         public int max() {
-            Arrays.sort(arr);
-            int lastElement = arr.length - 1;
-            return arr[lastElement];
+            return 0;
         }
     }
 
