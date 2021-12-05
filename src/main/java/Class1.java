@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.lang.Math;
 
 public class Class1 {
     public static void main(String[] args) {
@@ -7,33 +8,34 @@ public class Class1 {
         //print(book);
         //System.out.println("bookJava.isJavaBook() = " + bookJava.isJavaBook());
         //System.out.println("book.isJavaBook() = " + book.isJavaBook());
-        Meeting meeting = new Meeting("API Methods", 2021-12-02 ,23, true);
-        System.out.println("meeting.isTopicAboutAPI() = " + meeting.isTopicAboutAPI());
-        System.out.println("meeting.isOnline() = " + meeting.isOnline());
+        //Meeting meeting = new Meeting("API Methods", 2021-12-02 ,23, true);
+        //System.out.println("meeting.isTopicAboutAPI() = " + meeting.isTopicAboutAPI());
+        //System.out.println("meeting.isOnline() = " + meeting.isOnline());
 
-        Car lada = new Car("Lada", 10, "Black");
-        System.out.println("lada.isOld() = " + lada.isOld());
-        System.out.println("lada.isColorBlack() = " + lada.isColorBlack());
-        System.out.println("lada.timeLeftForUse() = " + lada.timeLeftForUse());
-        Car bmw = new Car("BMW", 40, "Red");
-        System.out.println("bmw.isOld() = " + bmw.isOld());
-        System.out.println("bmw.isColorBlack() = " + bmw.isColorBlack());
+        //Car lada = new Car("Lada", 10, "Black");
+        //System.out.println("lada.isOld() = " + lada.isOld());
+       // System.out.println("lada.isColorBlack() = " + lada.isColorBlack());
+       // System.out.println("lada.timeLeftForUse() = " + lada.timeLeftForUse());
+       // Car bmw = new Car("BMW", 40, "Red");
+       // System.out.println("bmw.isOld() = " + bmw.isOld());
+       // System.out.println("bmw.isColorBlack() = " + bmw.isColorBlack());
 
-        Phone samsung = new Phone("Samsung", 2, true, false); // why is it prohibited to put 1/0 for true/false here?
-        System.out.println("samsung.isPhoneOkForUse() = " + samsung.isPhoneOkForUse());
+       // Phone samsung = new Phone("Samsung", 2, true, false); // why is it prohibited to put 1/0 for true/false here?
+        /*System.out.println("samsung.isPhoneOkForUse() = " + samsung.isPhoneOkForUse());
         System.out.println("samsung.isIphone() = " + samsung.isIphone());
         Phone iphone = new Phone("iPhone", 1, true, true);
         System.out.println("iphone.isPhoneOkForUse() = " + iphone.isPhoneOkForUse());
         System.out.println("iphone.isIphone() = " + iphone.isIphone());
         System.out.println("iphone.nextSteps() = " + iphone.nextSteps());
-        System.out.println("samsung.nextSteps() = " + samsung.nextSteps());
+        System.out.println("samsung.nextSteps() = " + samsung.nextSteps());*/
 
 
-       /* MinMaxValueHolder holder = new MinMaxValueHolder(new int[]{1,2}); //  how to insert arr??
+       MinMaxValueHolder holder = new MinMaxValueHolder( );
         holder.push(10);
         holder.push(22);
+
         holder.min();
-        holder.max();*/
+        holder.max();
 
 
     }
@@ -182,7 +184,8 @@ public class Class1 {
     public static class MinMaxValueHolder {
         int min;
         int max;
-
+        //int x;
+        //int y;
 
 
 
@@ -192,6 +195,9 @@ public class Class1 {
          * @param val Any integer;
          */
         public void push(int val) {
+           //min = val;
+
+
 
         }
 
@@ -199,18 +205,19 @@ public class Class1 {
          * Returns minimal value ever pushed into structure.
          */
         public int min() {
-            return 0;
+
+
+           return 0;
         }
 
         /**
          * Returns maximal value ever pushed into structure.
          */
         public int max() {
+
             return 0;
         }
     }
 
 }
 
-
-// List<Integer> myList = new ArrayList<Integer>();   // what is it?? <>
