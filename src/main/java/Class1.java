@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.lang.Math;
-
 public class Class1 {
     public static void main(String[] args) {
         //Book book = new Book("Book","Bob",1987,54);
@@ -184,10 +181,7 @@ public class Class1 {
     public static class MinMaxValueHolder {
         int min;
         int max;
-        //int x;
-        //int y;
-
-
+        boolean initialized;
 
         /**
          * Pushes new value into structure.
@@ -195,27 +189,29 @@ public class Class1 {
          * @param val Any integer;
          */
         public void push(int val) {
-           //min = val;
+            if (!initialized) {
+                min = val;
+                max = val;
+                initialized = true;
+            }
 
+            if (min > val) min = val;
 
-
+            if (max < val) max = val;
         }
 
         /**
          * Returns minimal value ever pushed into structure.
          */
         public int min() {
-
-
-           return 0;
+           return min;
         }
 
         /**
          * Returns maximal value ever pushed into structure.
          */
         public int max() {
-
-            return 0;
+            return max;
         }
     }
 
