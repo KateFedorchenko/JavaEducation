@@ -2,7 +2,7 @@
  * Geometric triangle.
  */
 public class Triangle {
-    public double rightSide;
+    public double rightSide; // all fields must be private
     public double leftSide;
     public double baseSide;
 
@@ -19,7 +19,7 @@ public class Triangle {
      */
     public double area() {
         double sumOfSides = rightSide + leftSide + baseSide; // can the method perimeter() be called here?
-        double height = 2 * sumOfSides / baseSide;
+        double height = 2 * sumOfSides / baseSide; // error - to be
         double area = height * baseSide * 0.5;
         return area;
     }
@@ -30,16 +30,14 @@ public class Triangle {
      * @return Perimeter of triangle.
      */
     public double perimeter() {
-        double sumOfSides = rightSide + leftSide + baseSide;
-        return sumOfSides;
+        return rightSide + leftSide + baseSide;
     }
 
     /**
      * True if triangle equilateral.
      */
     public boolean isEquilateral() {
-        boolean result = (rightSide == leftSide && leftSide == baseSide) ? true : false;
-        return result;
+        return (rightSide == leftSide && leftSide == baseSide);
     }
 
     /**
@@ -50,8 +48,8 @@ public class Triangle {
         double y = Math.pow(leftSide, 2);
         double z = Math.pow(baseSide, 2);
 
-        boolean result_isRight = (x+y == z || x+z == y || y+z == x) ? true : false;
-        return result_isRight;
+        // _ - is not ok
+        return (x+y == z || x+z == y || y+z == x);
     }
 }
 

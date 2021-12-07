@@ -181,7 +181,7 @@ public class Class1 {
     public static class MinMaxValueHolder {
         int min;
         int max;
-        boolean initialized;
+        boolean initialized;  // флаг flag = boolean types of variables
 
         /**
          * Pushes new value into structure.
