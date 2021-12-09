@@ -37,4 +37,3 @@ public class Stack {
 
 
 
-// queue - сделать очередь.  LIFO
