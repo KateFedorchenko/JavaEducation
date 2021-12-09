@@ -2,9 +2,9 @@
  * Geometric triangle.
  */
 public class Triangle {
-    public double rightSide; // all fields must be private
-    public double leftSide;
-    public double baseSide;
+    private double rightSide;
+    private double leftSide;
+    private double baseSide;
 
     public Triangle (double rightSide, double leftSide, double baseSide) {
         this.rightSide = rightSide;
@@ -18,10 +18,8 @@ public class Triangle {
      * @return Area of triangle.
      */
     public double area() {
-        double sumOfSides = rightSide + leftSide + baseSide; // can the method perimeter() be called here?
-        double height = 2 * sumOfSides / baseSide; // error - to be
-        double area = height * baseSide * 0.5;
-        return area;
+        double p = 0.5 * perimeter();
+        return Math.sqrt(p * (p - rightSide) * (p - leftSide) * (p - baseSide));
     }
 
     /**
@@ -47,8 +45,6 @@ public class Triangle {
         double x = Math.pow(rightSide, 2);
         double y = Math.pow(leftSide, 2);
         double z = Math.pow(baseSide, 2);
-
-        // _ - is not ok
         return (x+y == z || x+z == y || y+z == x);
     }
 }
