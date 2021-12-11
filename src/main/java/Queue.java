@@ -18,11 +18,15 @@ public class Queue {
     }
 
     public int remove() {
-        if (start >= 0) {
-            return arr[start++];
-        } else {
-            System.err.println("Queue is empty");
-            return -1;
+        int temp = arr[start];
+
+        for(int j = start; j<size-1; j++){
+            arr[start] = arr[start+1];
+            start++;
         }
+        end--;
+        size--;
+        return temp;
     }
-}
+    }
+
