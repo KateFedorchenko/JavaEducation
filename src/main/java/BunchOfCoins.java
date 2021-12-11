@@ -18,7 +18,8 @@ public class BunchOfCoins {
     /**
      * Withdraws desired amount from this bunch of coins into returning bunch.
      *
-     * ACHTUNG!!! Proper solution of this problem is hard (google for knapsack problem).
+     * ACHTUNG!!! Proper (non-greedy) solution of this problem is hard (google for the knapsack problem).
+     * Use greedy algorithm for this method.
      * Withdrawal is <b>greedy</b>, which means it tries to use the most <b>valuable</b> coin while
      * remaining amount is not less than it value.
      * E.g. if amount = 19 then solution is {10x1, 5x1, 2x2}, but not {5x3, 2x2}
