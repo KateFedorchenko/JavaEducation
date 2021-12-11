@@ -26,9 +26,11 @@ public class Queue {
         }
         end--;
         int[] newArray = new int[arr.length-size--]; // изменить текущий массив нельзя. Его можно изменить, переписав значения в другой массив. Да?
-        for(int i = 0; i < arr.length-size; i++ ) {
+        System.arraycopy (arr, 0, newArray, 0, size);
+
+        /*for(int i = 0; i < arr.length-size; i++ ) {
                 newArray[i] = arr[i];              // ошибка. почему?
-            }
+            }*/
         return temp;
     }
     }
