@@ -6,7 +6,7 @@ public class Queue {
 
     public Queue(int size) {
         this.size = size;
-        arr = new int[size];
+        arr = new int[size];            // если я уменьшу это поле в другом методе, то и здесь оно уменьшится?
     }
 
     public void push(int val) {
@@ -25,7 +25,10 @@ public class Queue {
             start++;
         }
         end--;
-        size--;
+        int[] newArray = new int[arr.length-size--]; // изменить текущий массив нельзя. Его можно изменить, переписав значения в другой массив. Да?
+        for(int i = 0; i < arr.length-size; i++ ) {
+                newArray[i] = arr[i];              // ошибка. почему?
+            }
         return temp;
     }
     }

@@ -4,7 +4,8 @@ public class QueueDemo {
         for (int i = 1; i < 5; i++) {
             queue.push(i);
         }
-        System.out.println("queue.remove() = " + queue.remove());
+        queue.remove();
+        queue.remove();
 
     }
 }
