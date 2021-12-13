@@ -1,10 +1,21 @@
+import java.util.Arrays;
 /**
  * Bunch of coins with possible values of 1,2,5 and 10
  */
 public class BunchOfCoins {
-    // add necessary private fields and methods
-    // add necessary constructor(s)
-    // implement given public methods
+    private int[] coins = new int[7];
+    private int[] other;
+    private int start;
+
+    public void push(int val) {
+        if(start<coins.length) {
+            if (val == 1 || val == 2 || val == 5 || val == 10) {
+                coins[start++] = val;
+            } else {
+                System.err.println("Not a possible value to add");
+            }
+        }
+    }
 
     /**
      * Combines this BunchOfCoins with other increasing value of this.
@@ -12,7 +23,10 @@ public class BunchOfCoins {
      * @param other Non-null bunch of coins
      */
     public void combineWithOther(BunchOfCoins other) {
-        // place your code here.
+        if(other == null) {
+            System.err.println("Bunch of coins cannot be null");
+        }
+        // what to do? To put together two different arrays like coins{}+other{}?
     }
 
     /**
@@ -29,8 +43,16 @@ public class BunchOfCoins {
      * @return Bunch of coins with desired amount, null if withdraw is not possible with current state of bunch.
      */
     public BunchOfCoins greedyWithdrawal(int amount) {
-        // place your code here.
-        return null;
+        Arrays.sort(coins);
+        while (amount != 0) {
+            for (int i=coins.length - 1 ; i>=0 ; i--) {
+                if (coins[i] <= amount) {
+                    amount = amount - coins[i];
+                    i++;
+                }
+            }
+        }
+        return null;                             // incomplete. need more time to fulfill the method
     }
 
     /**
@@ -38,23 +60,41 @@ public class BunchOfCoins {
      * @return Quantity of coins with value 1 in this bunch.
      */
     public int getOnes() {
-        return 0;
+        int counter = 0;             // why variable Counter is underlined everywhere?
+        for(int i = 0; i<coins.length; i++) {
+            if(coins[i] == 1) {
+                counter+=1;
+            }
+        }
+        return counter;
     }
 
     /**
-     * Quantity of coins with value 2 in this bunch.
-     * @return Quantity of coins with value 2 in this bunch.
+     *  Quantity of coins with value 2 in this bunch.
+     *  @return Quantity of coins with value 2 in this bunch.
      */
     public int getTwos() {
-        return 0;
+        int counter = 0;
+        for(int i = 0; i<coins.length; i++) {
+            if(coins[i] == 2) {
+                counter+=1;
+            }
+        }
+        return counter;
     }
 
     /**
-     * Quantity of coins with value 5 in this bunch.
-     * @return Quantity of coins with value 5 in this bunch.
+     *  Quantity of coins with value 5 in this bunch.
+     *  @return Quantity of coins with value 5 in this bunch.
      */
     public int getFives() {
-        return 0;
+        int counter = 0;
+        for(int i = 0; i<coins.length; i++) {
+            if(coins[i] == 5) {
+                counter+=1;
+            }
+        }
+        return counter;
     }
 
     /**
@@ -62,15 +102,21 @@ public class BunchOfCoins {
      * @return Quantity of coins with value 10 in this bunch.
      */
     public int getTens() {
-        return 0;
+        int counter = 0;
+        for(int i = 0; i<coins.length; i++) {
+            if(coins[i] == 10) {
+                counter+=1;
+            }
+        }
+        return counter;
     }
 
-    @Override public String toString() {
+    @Override public String toString() { // what does it override and in which cases?
         return "BunchOfCoins{" +
-            "ones=" + getOnes() +
-            ", twos=" + getTwos() +
-            ", fives=" + getFives() +
-            ", tens=" + getTens() +
-            '}';
+                "ones=" + getOnes() +
+                ", twos=" + getTwos() +
+                ", fives=" + getFives() +
+                ", tens=" + getTens() +
+                '}';
     }
 }
