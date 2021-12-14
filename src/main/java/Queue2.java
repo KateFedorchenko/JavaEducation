@@ -1,5 +1,6 @@
 public class Queue2 {
     private Node head;
+    private Node tail;
 
     private static class Node{
         int val;
@@ -15,14 +16,10 @@ public class Queue2 {
         if(head == null) {
             Node node = new Node(val,null);
             head = node;
+            tail = node;
         } else {
-            Node cur = head;
-            while(cur.next != null) {
-                cur = cur.next;
-            }
-            //теперь cur указывает на последний элемент списка
-            Node node = new Node(val,null);
-            cur.next = node;
+            tail.next = new Node(val, null);
+            tail = tail.next;
         }
     }
 

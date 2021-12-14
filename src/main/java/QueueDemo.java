@@ -1,15 +1,40 @@
+import java.util.stream.IntStream;
+
 public class QueueDemo {
     public static void main(String[] args) {
-        Queue2 queue = new Queue2();
-        queue.push(42);
-        queue.push(0);
-        queue.push(12);
-        System.out.println();
-        for(int i = 0; i<4; i++) {
-            System.out.println("queue.remove() = " + queue.remove());
-        }
+        int size = 200_000;
 
+        Queue2 q2 = new Queue2();
+        Queue q1 = new Queue(size);
 
+        measureRunTime(
+            "Array queue",
+            () -> IntStream.range(0, size).forEach(i -> q1.push(i))
+        );
+
+        measureRunTime(
+            "LinkedList queue",
+            () -> IntStream.range(0, size).forEach(i -> q2.push(i))
+        );
+
+        measureRunTime(
+            "Array queue remove",
+            () -> IntStream.range(0, size / 2).forEach(i -> q1.remove())
+        );
+
+        measureRunTime(
+            "LinkedList queue remove",
+            () -> IntStream.range(0, size / 2).forEach(i -> q2.remove())
+        );
+    }
+
+    private static void measureRunTime(String runnableName, Runnable runnable) {
+        long currentTime = System.currentTimeMillis();// UNIX EPOCH
+
+        runnable.run();
+
+        System.out.println("Runnable " + runnableName + " took " + (System.currentTimeMillis() - currentTime) + " ms.");
 
     }
+
 }
