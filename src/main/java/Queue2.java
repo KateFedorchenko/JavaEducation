@@ -25,4 +25,15 @@ public class Queue2 {
             cur.next = node;
         }
     }
+
+    public int remove(){
+        if(head == null) {
+            System.err.println("Impossible to remove from empty queue");
+            return 0;
+        } else {
+            int temp = head.val;
+            head = head.next;
+            return temp;
+        }
+    }
 }
