@@ -8,10 +8,26 @@ public class LinkedListTraining {
             this.val = val;
             this.next = next;
         }
+
+        @Override public String toString() {
+            Node cur = this;
+            StringBuilder sb  = new StringBuilder();
+            while(cur != null) {
+                sb.append("{\"").append(cur.val).append("\"}").append(" -> ");
+                cur = cur.next;
+            }
+            sb.append("null");
+
+            return sb.toString();
+        }
     }
 
     public static void main(String[] args) {
         //test your code here
+
+        Node n = new Node("foo", new Node("bar", null));
+
+        System.out.println(n); // Node can be printed!
     }
 
     /**
