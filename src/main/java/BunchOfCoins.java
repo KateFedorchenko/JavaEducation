@@ -3,18 +3,16 @@ import java.util.Arrays;
  * Bunch of coins with possible values of 1,2,5 and 10
  */
 public class BunchOfCoins {
-    private int[] coins = new int[7];
-    private int[] other;
-    private int start;
+    private int numOfOnes;
+    private int numOfTwos;
+    private int numOfFives;
+    private int numOfTens;
 
-    public void push(int val) {
-        if(start<coins.length) {
-            if (val == 1 || val == 2 || val == 5 || val == 10) {
-                coins[start++] = val;
-            } else {
-                System.err.println("Not a possible value to add");
-            }
-        }
+    public BunchOfCoins(int numOfOnes, int numOfTwos, int numOfFives, int numOfTens) {
+        this.numOfOnes = numOfOnes;
+        this.numOfTwos = numOfTwos;
+        this.numOfFives = numOfFives;
+        this.numOfTens = numOfTens;
     }
 
     /**
@@ -23,10 +21,14 @@ public class BunchOfCoins {
      * @param other Non-null bunch of coins
      */
     public void combineWithOther(BunchOfCoins other) {
-        if(other == null) {
-            System.err.println("Bunch of coins cannot be null");
-        }
-        // what to do? To put together two different arrays like coins{}+other{}?
+        this.numOfOnes+= other.numOfOnes;
+        other.numOfOnes = 0;
+        this.numOfTwos+= other.numOfTwos;
+        other.numOfTwos = 0;
+        this.numOfFives+= other.numOfFives;
+        other.numOfFives = 0;
+        this.numOfTens+= other.numOfTens;
+        other.numOfTens = 0;
     }
 
     /**
@@ -42,17 +44,17 @@ public class BunchOfCoins {
      * @param amount Any non-negative number.
      * @return Bunch of coins with desired amount, null if withdraw is not possible with current state of bunch.
      */
-    public BunchOfCoins greedyWithdrawal(int amount) {
-        Arrays.sort(coins);
+    public BunchOfCoins greedyWithdrawal(int amount) {                        // help
+        /*int[] desiredAmount;
         while (amount != 0) {
-            for (int i=coins.length - 1 ; i>=0 ; i--) {
-                if (coins[i] <= amount) {
-                    amount = amount - coins[i];
+            for (int i=0 ; i < ???; i++) {
+                if (???[i] <= amount) {
+                    amount = amount - ???[i];
                     i++;
                 }
             }
-        }
-        return null;                             // incomplete. need more time to fulfill the method
+        }*/
+        return null;
     }
 
     /**
@@ -60,13 +62,7 @@ public class BunchOfCoins {
      * @return Quantity of coins with value 1 in this bunch.
      */
     public int getOnes() {
-        int counter = 0;             // why variable Counter is underlined everywhere?
-        for(int i = 0; i<coins.length; i++) {
-            if(coins[i] == 1) {
-                counter+=1;
-            }
-        }
-        return counter;
+        return this.numOfOnes;
     }
 
     /**
@@ -74,13 +70,7 @@ public class BunchOfCoins {
      *  @return Quantity of coins with value 2 in this bunch.
      */
     public int getTwos() {
-        int counter = 0;
-        for(int i = 0; i<coins.length; i++) {
-            if(coins[i] == 2) {
-                counter+=1;
-            }
-        }
-        return counter;
+        return this.numOfTwos;
     }
 
     /**
@@ -88,13 +78,7 @@ public class BunchOfCoins {
      *  @return Quantity of coins with value 5 in this bunch.
      */
     public int getFives() {
-        int counter = 0;
-        for(int i = 0; i<coins.length; i++) {
-            if(coins[i] == 5) {
-                counter+=1;
-            }
-        }
-        return counter;
+        return this.numOfFives;
     }
 
     /**
@@ -102,13 +86,7 @@ public class BunchOfCoins {
      * @return Quantity of coins with value 10 in this bunch.
      */
     public int getTens() {
-        int counter = 0;
-        for(int i = 0; i<coins.length; i++) {
-            if(coins[i] == 10) {
-                counter+=1;
-            }
-        }
-        return counter;
+        return this.numOfTens;
     }
 
     @Override public String toString() { // what does it override and in which cases?

@@ -33,4 +33,7 @@ public class Queue2 {
             return temp;
         }
     }
+
+
+    // add method int size -- is it effective or not
 }

@@ -9,9 +9,9 @@ public class LinkedListTraining {
             this.next = next;
         }
 
-        public Node(){
+        /*public Node(){
 
-        }
+        }*/
 
         @Override public String toString() {
             Node cur = this;
@@ -30,7 +30,7 @@ public class LinkedListTraining {
         // Example of concatenation
         Node headList = new Node("first",null);
         Node tailList = new Node("second",null);
-        splice(headList,tailList);                                 // no use as "headList.splice(headList,tailList)" - why?
+        splice(headList,tailList);                                 // what "free function." means?
         System.out.println(headList); // Node can be printed!
 
         // Example of LinkedList creation
@@ -45,26 +45,12 @@ public class LinkedListTraining {
      * @param values Vararg of values. It is essentially String[] in the terms of usage in function.
      * @return Reference to the head node of newly created linked list
      */
-    public static Node createList(String... values) {                           // a bit strange - did not know this --> "String... values"
-        Node head = new Node();
-        Node node2 = new Node();
-        Node node3 = new Node();
-        Node tail = new Node();
+    public static Node createList(String... values) {                           // help
+        Node node;
         for(int i = 0; i<values.length; i++) {
-             if(i == 0) {
-                head.val = values[i];
-            } else if(i == 1) {
-                node2.val = values[i];
-            } else if(i == 2) {
-                node3.val = values[i];
-            } else if(i == 3) {
-                tail.val = values[i];
-            }
+            node = new Node(values[i],new Node(values[i+1],null));
         }
-        head.next = node2;
-        node2.next = node3;
-        node3.next = tail;
-        return head;
+        return new Node(values[0],null);
     }
 
 
@@ -76,6 +62,6 @@ public class LinkedListTraining {
      */
     public static void splice(Node headList, Node tailList) {
         headList.next = tailList;
-        tailList= null;                      // seems like not ok
+        tailList= null;                      //  contract btw developers or...?
     }
 }
