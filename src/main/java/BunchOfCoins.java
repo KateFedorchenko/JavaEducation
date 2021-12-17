@@ -45,15 +45,44 @@ public class BunchOfCoins {
      * @return Bunch of coins with desired amount, null if withdraw is not possible with current state of bunch.
      */
     public BunchOfCoins greedyWithdrawal(int amount) {                        // help
-        /*int[] desiredAmount;
-        while (amount != 0) {
-            for (int i=0 ; i < ???; i++) {
-                if (???[i] <= amount) {
-                    amount = amount - ???[i];
-                    i++;
-                }
+        int ones = 0;
+        int twos = 0;
+        int fives = 0;
+        int tens = 0;
+
+        while (amount > 0) {
+            if (amount >= 10) {
+                tens++;
+                amount -= 10;
             }
-        }*/
+            else if (amount >= 5) {
+                fives++;
+                amount -= 5;
+            }
+            else if (amount >= 2) {
+                twos++;
+                amount -= 2;
+            }
+            else { // case when amount == 1
+                ones++;
+                amount--;
+            }
+        }
+        // check whether it is possible to withdraw desired quantity of coins
+
+        if (numOfOnes >= ones && numOfTwos >= twos && numOfFives >= fives && numOfTens >= tens) {
+            // withdrawal is possible
+            // we need to change state of this
+
+            numOfOnes -= ones;
+            numOfTwos -= twos;
+            numOfFives -= fives;
+            numOfTens -= tens;
+
+            return new BunchOfCoins(ones, twos, fives, tens);
+        }
+
+        // withdrawal is not possible return null
         return null;
     }
 
