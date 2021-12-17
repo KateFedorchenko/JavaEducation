@@ -4,6 +4,7 @@ public class BunchOfCoinsDemo {
         BunchOfCoins other = new BunchOfCoins(1,1,1,1);
         coins.combineWithOther(other);
         coins.greedyWithdrawal(5);
+        coins.greedyWithdrawal(0);
 
 
 

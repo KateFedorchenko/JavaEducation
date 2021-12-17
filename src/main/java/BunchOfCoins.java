@@ -44,7 +44,7 @@ public class BunchOfCoins {
      * @param amount Any non-negative number.
      * @return Bunch of coins with desired amount, null if withdraw is not possible with current state of bunch.
      */
-    public BunchOfCoins greedyWithdrawal(int amount) {                        // help
+    public BunchOfCoins greedyWithdrawal(int amount) {
         int ones = 0;
         int twos = 0;
         int fives = 0;

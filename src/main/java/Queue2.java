@@ -2,6 +2,7 @@ public class Queue2 {
     private Node head;
     private Node tail;
 
+
     private static class Node{
         int val;
         Node next;
@@ -34,6 +35,4 @@ public class Queue2 {
         }
     }
 
-
-    // add method int size -- is it effective or not
 }

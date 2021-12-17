@@ -45,12 +45,23 @@ public class LinkedListTraining {
      * @param values Vararg of values. It is essentially String[] in the terms of usage in function.
      * @return Reference to the head node of newly created linked list
      */
-    public static Node createList(String... values) {                           // help
-        Node node;
-        for(int i = 0; i<values.length; i++) {
-            node = new Node(values[i],new Node(values[i+1],null));
+    public static Node createList(String... values) {
+        if(values.length == 0){
+            return null;
         }
-        return new Node(values[0],null);
+        Node head = new Node(null,null);
+        Node node = new Node(null,null);
+        for(int i = 0; i<values.length; i++) {
+             if(i == 0){
+                head = new Node(values[0],null);
+                //head.next = new Node(values[i+1],null);
+            } else {
+                node = new Node(values[i],null);
+                node.next = new Node(values[i+1],null);
+                i++;
+            }
+        }
+        return head;                       // how to create a new node every time without changing the name of variable Node???
     }
 
 
@@ -62,6 +73,6 @@ public class LinkedListTraining {
      */
     public static void splice(Node headList, Node tailList) {
         headList.next = tailList;
-        tailList= null;                      //  contract btw developers or...?
+        tailList= null;
     }
 }
