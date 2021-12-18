@@ -34,7 +34,7 @@ public class LinkedListTraining {
         System.out.println(headList); // Node can be printed!
 
         // Example of LinkedList creation
-        createList("foo", "qwe", "bar", "test");
+        createList("foo", "qwe", "bar", "test","a","b","c","d","e");
 
     }
 
@@ -46,22 +46,22 @@ public class LinkedListTraining {
      * @return Reference to the head node of newly created linked list
      */
     public static Node createList(String... values) {
-        if(values.length == 0){
-            return null;
+        Node node = null;
+        for (int i = values.length - 1; i >= 0; i--) {
+            node = new Node(values[i],node);
+            System.out.println(node);
         }
-        Node head = new Node(null,null);
-        Node node = new Node(null,null);
-        for(int i = 0; i<values.length; i++) {
-             if(i == 0){
-                head = new Node(values[0],null);
-                //head.next = new Node(values[i+1],null);
-            } else {
-                node = new Node(values[i],null);
-                node.next = new Node(values[i+1],null);
-                i++;
-            }
-        }
-        return head;                       // how to create a new node every time without changing the name of variable Node???
+        return node;
+//        Node head = null;
+//        Node node;
+//        for (int i = 0; i < values.length; i++) {
+//            node = new Node(values[i],null);
+//            if(head == null) {
+//                head = node;
+//            }
+//        }
+//        return head;
+                             // how to create a new node every time without changing the name of variable Node???
     }
 
 
