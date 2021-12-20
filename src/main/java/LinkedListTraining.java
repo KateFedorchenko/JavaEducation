@@ -75,4 +75,30 @@ public class LinkedListTraining {
         headList.next = tailList;
         tailList= null;
     }
+
+    /**
+     * Checks whether given list contains specified value.
+     *
+     * @param listHead Head of linked list.
+     * @param value Value to search.
+     * @return {@code True} if list contain value, {@code false} otherwise.
+     */
+    public static boolean listContainsValue(Node listHead, String value) {
+        return false;
+    }
+
+    /**
+     * Reverses given linked list.
+     * TRY TO IMPLEMENT with O(1) memory!
+     * e.g.
+     * 1->2->3->4->null
+     *   converts to
+     * 4->3->2->1->null
+     *
+     * @param listHead Head of linked list.
+     * @return Head of reversed linked list.
+     */
+    public static Node reverseList(Node listHead) {
+        return null;
+    }
 }
