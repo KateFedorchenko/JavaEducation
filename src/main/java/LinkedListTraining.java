@@ -9,9 +9,6 @@ public class LinkedListTraining {
             this.next = next;
         }
 
-        /*public Node(){
-
-        }*/
 
         @Override public String toString() {
             Node cur = this;
@@ -28,13 +25,17 @@ public class LinkedListTraining {
 
     public static void main(String[] args) {
         // Example of concatenation
-        Node headList = new Node("first",null);
-        Node tailList = new Node("second",null);
-        splice(headList,tailList);                                 // what "free function." means?
-        System.out.println(headList); // Node can be printed!
+//        Node headList = new Node("first",null);
+//        Node tailList = new Node("second",null);
+//        splice(headList,tailList);
+//        System.out.println(headList); // Node can be printed!
+//
+//        // Example of LinkedList creation
+//        createList("foo", "qwe", "bar", "test","a","b","c","d","e");
 
-        // Example of LinkedList creation
-        createList("foo", "qwe", "bar", "test","a","b","c","d","e");
+
+        Node node = new Node("a",new Node("b",new Node("c",null)));          // how to make it look different?
+        System.out.println("listContainsValue(node,\"c\") = " + listContainsValue(node, "c"));
 
     }
 
@@ -52,16 +53,6 @@ public class LinkedListTraining {
             System.out.println(node);
         }
         return node;
-//        Node head = null;
-//        Node node;
-//        for (int i = 0; i < values.length; i++) {
-//            node = new Node(values[i],null);
-//            if(head == null) {
-//                head = node;
-//            }
-//        }
-//        return head;
-                             // how to create a new node every time without changing the name of variable Node???
     }
 
 
@@ -84,8 +75,17 @@ public class LinkedListTraining {
      * @return {@code True} if list contain value, {@code false} otherwise.
      */
     public static boolean listContainsValue(Node listHead, String value) {
-        return false;
+        boolean found = false;
+        while(listHead != null){
+            if(listHead.val == value){
+                found = true;
+                break;
+            }
+            listHead = listHead.next;
+        }
+        return found;
     }
+
 
     /**
      * Reverses given linked list.
