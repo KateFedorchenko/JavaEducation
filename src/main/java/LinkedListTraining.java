@@ -75,15 +75,13 @@ public class LinkedListTraining {
      * @return {@code True} if list contain value, {@code false} otherwise.
      */
     public static boolean listContainsValue(Node listHead, String value) {
-        boolean found = false;
         while(listHead != null){
             if(listHead.val.equals(value)){
-                found = true;
-                break;
+                return true;
             }
             listHead = listHead.next;
         }
-        return found;
+        return false;
     }
 
 
