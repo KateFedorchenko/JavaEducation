@@ -1,34 +1,25 @@
 public class InheritanceDemo2{
     public static void main(String[] args) {
         Triangle triangle = new Triangle(12.5,12.5,16);
-        triangle.perimeter();
-        triangle.area();
+        System.out.println("triangle.perimeter() = " + triangle.perimeter());
+        System.out.println("triangle.area() = " + triangle.area());
 
         Rectangle rectangle = new Rectangle(25.5, 35.5);
-        rectangle.perimeter();
-        rectangle.area();
+        System.out.println("rectangle.perimeter() = " + rectangle.perimeter());
+        System.out.println("rectangle.area() = " + rectangle.area());
 
         Square square = new Square(25.5);
-        square.perimeter();
-        square.area();
+        System.out.println("square.perimeter() = " + square.perimeter());
+        System.out.println("square.area() = " + square.area());
 
         Circle сircle = new Circle(6.5);
-        сircle.perimeter();
-        сircle.area();
+        System.out.println("сircle.perimeter() = " + сircle.perimeter());
+        System.out.println("сircle.area() = " + сircle.area());
 
     }
 
 
     static class Figure{
-        private double rightSide;
-        private double leftSide;
-        private double baseSide;
-
-        public Figure(double rightSide,double leftSide,double baseSide) {
-            this.rightSide = rightSide;
-            this.leftSide = leftSide;
-            this.baseSide = baseSide;
-        }
 
         public double area(){
             return 1;
@@ -38,55 +29,51 @@ public class InheritanceDemo2{
             return 1;
         }
 
-        public double getRightSide() {
-            return rightSide;
-        }
-        public double getLeftSide() {
-            return leftSide;
-        }
-        public double getBaseSide() {
-            return baseSide;
-        }
     }
 
 
     static class Triangle extends Figure{
+        private double rightSide;
+        private double leftSide;
+        private double baseSide;
 
         public Triangle(double rightSide, double leftSide, double baseSide){
-            super(rightSide);
-            super(leftSide);
-            super(baseSide);
+           this.rightSide = rightSide;
+           this.leftSide = leftSide;
+           this.baseSide = baseSide;
         }
 
         @Override
         public double area() {
             double p = 0.5 * perimeter();
-            return Math.sqrt(p * (p - getRightSide()) * (p - getLeftSide()) * (p - getBaseSide()));
+            return Math.sqrt(p * (p - rightSide) * (p - leftSide) * (p - baseSide));
         }
 
         @Override
         public double perimeter() {
-            return getRightSide() + getLeftSide() + getBaseSide();
+            return rightSide + leftSide + baseSide;
         }
 
     }
 
     static class Rectangle extends Figure{
+        private double rightSide;
+        private double baseSide;
 
 
         public Rectangle(double rightSide, double baseSide){
-            super(rightSide);
-            super(baseSide);
+            this.rightSide = rightSide;
+            this.baseSide = baseSide;
         }
 
         @Override
         public double area() {
-            return getRightSide() * getBaseSide();
+            return rightSide * baseSide;
         }
 
         @Override
         public double perimeter() {
-            return getRightSide() + getBaseSide() + getRightSide() + getBaseSide();
+            return rightSide + baseSide + rightSide + baseSide;
         }
 
     }
