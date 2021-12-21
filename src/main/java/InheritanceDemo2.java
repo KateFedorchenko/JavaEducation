@@ -1,34 +1,41 @@
 public class InheritanceDemo2{
     public static void main(String[] args) {
-        Triangle triangle = new Triangle(12.5,12.5,16);
-        System.out.println("triangle.perimeter() = " + triangle.perimeter());
-        System.out.println("triangle.area() = " + triangle.area());
+        Figure[] arr = new Figure[5];
+        arr[0] = new Triangle(2,2,2);
+        arr[1] = new Rectangle(2,2);
+        arr[2] = new Square(2);
+        arr[3] = new Circle(2);
+        arr[4] = new Triangle(3,4,4);
 
-        Rectangle rectangle = new Rectangle(25.5, 35.5);
-        System.out.println("rectangle.perimeter() = " + rectangle.perimeter());
-        System.out.println("rectangle.area() = " + rectangle.area());
-
-        Square square = new Square(25.5);
-        System.out.println("square.perimeter() = " + square.perimeter());
-        System.out.println("square.area() = " + square.area());
-
-        Circle сircle = new Circle(6.5);
-        System.out.println("сircle.perimeter() = " + сircle.perimeter());
-        System.out.println("сircle.area() = " + сircle.area());
 
     }
 
+    public static double sumOfAreas(Figure[] arr) {
+        double sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i].area();
+        }
+        return sum;
+    }
 
-    static class Figure{
 
-        public double area(){
-            return 1;
+    static abstract class Figure{
+
+        public abstract double area();
+        public abstract double perimeter();
+
+    }
+
+    static class Point extends Figure{
+        @Override
+        public double area() {
+            return 0;
         }
 
-        public double perimeter(){
-            return 1;
+        @Override
+        public double perimeter() {
+            return 0;
         }
-
     }
 
 
@@ -54,6 +61,17 @@ public class InheritanceDemo2{
             return rightSide + leftSide + baseSide;
         }
 
+        public double getRightSide() {
+            return rightSide;
+        }
+
+        public double getLeftSide() {
+            return leftSide;
+        }
+
+        public double getBaseSide() {
+            return baseSide;
+        }
     }
 
     static class Rectangle extends Figure{
@@ -104,7 +122,8 @@ public class InheritanceDemo2{
 
     static class Circle extends Figure{
         private double radius;
-        private final double P = 3.14;
+
+
 
         public Circle(double radius){
             this.radius = radius;
@@ -112,21 +131,15 @@ public class InheritanceDemo2{
 
         @Override
         public double area() {
-            return Math.pow(radius,2) * P;
+            return Math.pow(radius,2) * Math.PI;
         }
 
         @Override
         public double perimeter() {
-            return 2 * P *radius;
+            return 2 * Math.PI *radius;
         }
 
 
-        public double getRadius() {
-            return radius;
-        }
-        public double getP() {
-            return P;
-        }
     }
 
 }
