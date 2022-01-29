@@ -8,6 +8,8 @@ public class InterfaceDemo2 {
         Letter letter1 = new Letter("Tom","Max","hello");
         printAll(new Printable[] {message1,letter1});
 
+
+
     }
 
     public static void printAll(Printable[] printables) {

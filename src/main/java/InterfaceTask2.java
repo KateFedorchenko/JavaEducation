@@ -11,8 +11,8 @@ public class InterfaceTask2 {
         Students student3 = new Students("Sarah", "Bool", 20, "AB12");
         Students student4 = new Students("Bob", "Swovsky", 17, "AB14");
         Students student5 = new Students("Kate", "LeBlanc", 18, "AB12");
-        printAllStudents(new Print[]{student1, student2, student3, student4, student5});
-        sendAllStudents(new Print[]{student1, student2, student3, student4, student5});
+        printAllStudents(new Students[]{student1, student2, student3, student4, student5});
+        sendAllStudents(new Students[]{student1, student2, student3, student4, student5});
     }
        public static void printAllStudents(Print[] printables) {
             for (int i = 0; i < printables.length; i++) {
@@ -20,9 +20,10 @@ public class InterfaceTask2 {
             }
         }
 
-        public static void sendAllStudents(Print[] printables) {
+        public static void sendAllStudents(Send[] printables) throws Exception {
+            PrintStream ps = new PrintStream(new FileOutputStream("D:\\students_list.txt"));
             for (int i = 0; i < printables.length; i++) {
-                //printables[i].sendList(new PrintStream(new FileOutputStream("D:\\students_list.txt"))); // doesn't work = why?
+                printables[i].sendList(ps);
              }
         }
 
