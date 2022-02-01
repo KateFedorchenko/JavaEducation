@@ -7,17 +7,19 @@ public class ExceptionsHW1 {
         int number1 = scanner.nextInt();
         int number2 = scanner.nextInt();
         if(number1>=0 && number2>=0) {
-            if(number1>=0 && number2 == 0) {
+            if(number2 == 0) {
                 System.out.println("Are you sure the second number to be 0? If yes - print 'y' or 'yes'!");
                 String str = scanner.next();
                 if(str.equals("y") || str.equals("yes")){
-                    System.out.println("Thank you! You have inserted two numbers " + number1 + " и "+ number2);
-                    System.out.println("The numbers are going to be divided: ");
-                    deleteNumbers(number1,number2);
+
                 } else {
                     System.out.println("Ok. Insert another numbers one more time!");
+                    return;
                 }
             }
+            System.out.println("Thank you! You have inserted two numbers " + number1 + " и "+ number2);
+            System.out.println("The numbers are going to be divided: ");
+            deleteNumbers(number1,number2);
         } else {
             System.out.println("Negative numbers are not accepted here. Try one more time!");
         }
