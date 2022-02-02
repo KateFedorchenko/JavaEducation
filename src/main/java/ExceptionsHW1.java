@@ -19,16 +19,16 @@ public class ExceptionsHW1 {
             }
             System.out.println("Thank you! You have inserted two numbers " + number1 + " и "+ number2);
             System.out.println("The numbers are going to be divided: ");
-            deleteNumbers(number1,number2);
+            divideNumbers(number1,number2);
         } else {
             System.out.println("Negative numbers are not accepted here. Try one more time!");
         }
     }
 
-    public static void deleteNumbers(int num1, int num2) {
+    public static void divideNumbers(int num1, int num2) {
         try {
             System.out.println(num1 / num2);
-        } catch (ArithmeticException | IndexOutOfBoundsException e) {
+        } catch (ArithmeticException e) {
             System.out.println("Compute error. It was a mistake to put 0 for the second number!");
         }
     }
