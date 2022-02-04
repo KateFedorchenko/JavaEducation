@@ -36,7 +36,7 @@ public class ExceptionsHW4 {
                         System.out.println("Insert the number in the range of 51 to 99");
                         if(i > 1) {
                             if(num < 51) {
-                                throw new BusinessException("Game over because you've inserted number < 51");
+                                throw new BusinessException("Game over! You've inserted number < 51");
                             }
                         }
                     }
