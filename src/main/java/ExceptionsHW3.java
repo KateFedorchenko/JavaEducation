@@ -7,8 +7,8 @@ public class ExceptionsHW3 {
         int randomNumber = r.nextInt(100);
 
         Scanner scanner = new Scanner(System.in);
-        int numOfTries = 10;
-        for (int i = 0; i < numOfTries; i++) {
+        int numOfAttempts = 10;
+        for (int i = 0; i < numOfAttempts; i++) {
             int num = scanner.nextInt();
             if(num == randomNumber) {
                 System.out.println("You won!");
@@ -17,7 +17,11 @@ public class ExceptionsHW3 {
             if(num > 99 || num < 0) {
                 throw new BusinessException("Your number is out of possible range");
             }
-            System.out.println("Try one more time!");
+            if(num > randomNumber) {
+                System.out.println("The secret number is lesser than current iteration attempt.");
+            } else {
+                System.out.println("The secret number is bigger than current iteration attempt.");
+            };
         }
         System.out.println("Sorry, the game is over.");
     }
