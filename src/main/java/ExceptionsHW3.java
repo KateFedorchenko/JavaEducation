@@ -19,6 +19,7 @@ public class ExceptionsHW3 {
             }
             System.out.println("Try one more time!");
         }
+        System.out.println("Sorry, the game is over.");
     }
 
     static class BusinessException extends RuntimeException {
