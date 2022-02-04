@@ -5,12 +5,11 @@ public class ExceptionsHW4 {
         public static void main(String[] args) {
             Random r = new Random();
             int randomNumber = r.nextInt(100);
-            int isRight = randomNumber < 50 ? 0 :1;
 
             Scanner scanner = new Scanner(System.in);
-            int numOfTries = 10;
+            int numOfAttempts = 10;
             int[] arrOfNums = new int[10];
-            for (int i = 0; i < numOfTries; i++) {
+            for (int i = 0; i < numOfAttempts; i++) {
                 int num = scanner.nextInt();
                 if(num == randomNumber) {
                     System.out.println("You won!");
@@ -25,24 +24,22 @@ public class ExceptionsHW4 {
                             throw new BusinessException("The same number appears twice.");
                         }
                     }
-                    if(isRight == 0) {
-                        System.out.println("Insert the number in the range of 0 to 50");
-                        if(i > 1) {
-                            if(num > 50) {
-                                throw new BusinessException("Game over because you've inserted number > 50");
-                            }
+                    if(arrOfNums[i-1] > randomNumber) {
+                        if(num > arrOfNums[i-1]) {
+                            throw new BusinessException("Bad luck! You have inserted the number bigger than the previous one.");
                         }
                     } else {
-                        System.out.println("Insert the number in the range of 51 to 99");
-                        if(i > 1) {
-                            if(num < 51) {
-                                throw new BusinessException("Game over! You've inserted number < 51");
-                            }
+                        if(num < arrOfNums[i-1]) {
+                            throw new BusinessException("Bad luck! You have inserted the number lesser than the previous one.");
                         }
                     }
                 }
+                if(num > randomNumber) {
+                    System.out.println("The secret number is lesser than current iteration attempt.");
+                } else {
+                    System.out.println("The secret number is bigger than current iteration attempt.");
+                }
                 arrOfNums[i] = num;
-                System.out.println("Try one more time!");
             }
             System.out.println("Sorry, the game is over.");
         }
