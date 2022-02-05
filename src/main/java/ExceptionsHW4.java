@@ -19,7 +19,7 @@ public class ExceptionsHW4 {
                     throw new BusinessException("Your number is out of possible range");
                 }
                 if(i > 0) {
-                    for (int j = 0; j < arrOfNums.length; j++) {
+                    for (int j = 0; j < i; j++) {
                         if(arrOfNums[j] == num) {
                             throw new BusinessException("The same number appears twice.");
                         }
