@@ -21,7 +21,7 @@ public class ExceptionsHW3 {
                 System.out.println("The secret number is lesser than current iteration attempt.");
             } else {
                 System.out.println("The secret number is bigger than current iteration attempt.");
-            };
+            }
         }
         System.out.println("Sorry, the game is over.");
     }
