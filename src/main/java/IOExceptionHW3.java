@@ -17,7 +17,6 @@ public class IOExceptionHW3 {
                 numOfBytes++;
                 i = file1Reader.read();
             }
-           // file1Reader.close();
             if(numOfBytes == 0) {
                 throw new BusinessException("The file is empty");
             }
@@ -37,7 +36,6 @@ public class IOExceptionHW3 {
         }  catch (FileNotFoundException e) {
             throw new BusinessException("No file has not been found");
         }
-
     }
 
     static class BusinessException extends RuntimeException {
