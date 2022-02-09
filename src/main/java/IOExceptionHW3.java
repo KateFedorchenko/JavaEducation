@@ -8,19 +8,16 @@ import java.util.Arrays;
 public class IOExceptionHW3 {
     public static void main(String[] args) throws IOException {
         int numOfBytes = 0;
-        FileInputStream file1Reader = null;
-        FileOutputStream file2Writer = null;
 
-        try {
-            file1Reader = new FileInputStream("D:\\HW3_file1.txt");         // чтение файл1
-            file2Writer = new FileOutputStream("D:\\HW3_file2.txt");
-
+        try (FileInputStream file1Reader = new FileInputStream("D:\\HW3_file1.txt");         // чтение файл1
+            FileOutputStream file2Writer = new FileOutputStream("D:\\HW3_file2.txt"))
+        {
             int i = file1Reader.read();
             while (i != -1) {
                 numOfBytes++;
                 i = file1Reader.read();
             }
-
+           // file1Reader.close();
             if(numOfBytes == 0) {
                 throw new BusinessException("The file is empty");
             }
@@ -39,9 +36,6 @@ public class IOExceptionHW3 {
             System.out.println(Arrays.toString(buffer));
         }  catch (FileNotFoundException e) {
             throw new BusinessException("No file has not been found");
-        } finally {
-            file1Reader.close();
-            file2Writer.close();
         }
 
     }
