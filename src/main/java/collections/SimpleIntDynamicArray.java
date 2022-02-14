@@ -24,7 +24,13 @@ public class SimpleIntDynamicArray {
      * @param idx index of an element to delete.
      */
     public void remove(int idx) {
-
+        if(data[idx] == data[size-1]) {
+            data[size-1] = 0;
+            return;
+        }
+        for(int i = data[idx]; i < data.length-1; i++) {
+            data[i] = data[i+1];
+        }
     }
 
     /**
@@ -33,7 +39,7 @@ public class SimpleIntDynamicArray {
      * @param x value of the new element.
      */
     public void set(int idx, int x) {
-
+        data[idx] = x;
     }
 
     /**
@@ -50,6 +56,6 @@ public class SimpleIntDynamicArray {
      * @return the size of the array.
      */
     public int size() {
-        return 0;
+        return size;
     }
 }
