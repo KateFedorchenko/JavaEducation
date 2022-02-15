@@ -10,7 +10,7 @@ public class SimpleIntDynamicArray {
      */
     public void add(int x) {
         if(size == data.length) {
-            int[] arr = new int[data.length +1];
+            int[] arr = new int[data.length *2];
             for (int i = 0; i < data.length; i++) {
                 arr[i] = data[i];
             }
@@ -24,13 +24,11 @@ public class SimpleIntDynamicArray {
      * @param idx index of an element to delete.
      */
     public void remove(int idx) {
-        if(data[idx] == data[size-1]) {
-            data[size-1] = 0;
-            return;
-        }
-        for(int i = data[idx]; i < data.length-1; i++) {
+        ensureIndex(idx);
+        for(int i = idx; i < data.length-1; i++) {
             data[i] = data[i+1];
         }
+        size--;
     }
 
     /**
@@ -39,6 +37,7 @@ public class SimpleIntDynamicArray {
      * @param x value of the new element.
      */
     public void set(int idx, int x) {
+        ensureIndex(idx);
         data[idx] = x;
     }
 
@@ -48,6 +47,7 @@ public class SimpleIntDynamicArray {
      * @return value of the chosen element.
      */
     public int get(int idx) {
+        ensureIndex(idx);
         return data[idx];
     }
 
@@ -57,5 +57,22 @@ public class SimpleIntDynamicArray {
      */
     public int size() {
         return size;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for (int i = 0; i < size-1; i++) {
+            sb.append(data[i]).append(", ");
+        }
+        sb.append(data[size-1]).append(']');
+        return sb.toString();
+    }
+
+    private void ensureIndex(int idx) {
+        if (size <= idx) {
+            throw new IndexOutOfBoundsException("Index " + idx + " is out of bound");
+        }
     }
 }

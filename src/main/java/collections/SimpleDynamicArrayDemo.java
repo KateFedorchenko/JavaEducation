@@ -6,14 +6,13 @@ public class SimpleDynamicArrayDemo {
     public static void main(String[] args) {
         SimpleIntDynamicArray array = new SimpleIntDynamicArray();
         // System.out.println(Arrays.toString(array));  // почему в консоли выводит collections.SimpleIntDynamicArray@eed1f14 ??
-        for (int i = 0; i < 6; i++) {
-            array.add(i);
+        for (int i = 0; i < 11; i++) {
+            array.add(i*i+10);
         }
         //System.out.println(array.get(2)); // output 3
         //array.set(0,34);
-       // System.out.println(array.size());
-        array.remove(1);
-        System.out.println(array.get(1));
+        System.out.println(array);
+        System.out.println(array.get(12));
 
 
     }
