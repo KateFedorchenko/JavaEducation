@@ -6,9 +6,10 @@ import java.util.List;
 
 public class KthLargestNumber {
     public static void main(String[] args) {
-        List<Double> nums = new ArrayList<>(List.of(2.1,200.34,1.9,3.3,4.3,54.3,55.5));
+        List<Double> nums = new ArrayList<>(List.of(12.23121,20.421434,30.912421,3.3,4.3241124,54.3,55.24124215,489.2,4.5,4.6,4.7,4.2,3.2,4.3,4.9,4.8,55.2,53.2,755.2,342.2,53.2));
         System.out.println(nums);
-        System.out.println(findKthLargestElement(nums,3));
+        System.out.println(findKthLargestElement(nums,10));
+        System.out.println(getMaxValue(nums,10));
     }
     /**
      * Find the kTh largest element in the list.
@@ -25,9 +26,18 @@ public class KthLargestNumber {
         }
         //possible solution but it performance poorly when size of nums much bigger than k.
         List<Double> copy = new ArrayList<>(nums);
-        copy.sort(Comparator.naturalOrder());
-        return copy.get(copy.size()-1);
+        copy.sort(Comparator.naturalOrder());      // it changes the order --> breaks the rule
+        System.out.println(copy);
+        return copy.get(k-1);
+    }
+
+    static double getMaxValue(List<Double> arr, int k) {
+        double maxValue = arr.get(0);
+        for(int i = 1; i < k; i++) {
+            if(maxValue < arr.get(i)) {
+                maxValue = arr.get(i);
+            }
+        }
+        return maxValue;
     }
 }
-
-// not really got the idea of "when size of nums much bigger than k" but now it returns the correct value
