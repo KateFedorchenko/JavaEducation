@@ -25,6 +25,7 @@ public class RemoveDuplicatesTest {
     @CsvSource(
         value = {
             "[1,2,3]   | [1,2,3]",
+                "[1,1,1] | [1]",
             "[1,2,2,3] | [1,2,3]",
             "[1,1,1,1] | [1]",
             "[1,1]     | [1]",
@@ -33,7 +34,6 @@ public class RemoveDuplicatesTest {
         },
         delimiter = '|'
     )
-    @NullSource
     public void shouldRemoveDuplicates(
         @ConvertWith(ListArgumentConverter.class) List<Integer> nums,
         @ConvertWith(ListArgumentConverter.class) List<Integer> expected
