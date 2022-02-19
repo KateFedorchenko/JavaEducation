@@ -1,9 +1,6 @@
 package collections.problem;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,7 +24,7 @@ public class KthLargestNumberTest {
     @ParameterizedTest
     @MethodSource
     public void shouldFindKthLargestElement(List<Double> nums, int k, double expectedAnswer) {
-        Double actualAnswer = KthLargestNumber.findKthLargestElement(nums, k);
+        Double actualAnswer = KthLargestNumber.findKthRankedElement(nums, k);
 
         assertEquals(expectedAnswer, actualAnswer);
     }
@@ -44,7 +41,7 @@ public class KthLargestNumberTest {
     public void shouldThrowIllegalArgumentException(List<Double> nums, int k) {
         Assertions.assertThrows(
             IllegalArgumentException.class,
-            () -> KthLargestNumber.findKthLargestElement(nums, k)
+            () -> KthLargestNumber.findKthRankedElement(nums, k)
         );
     }
 }
