@@ -11,6 +11,7 @@ public class ArrayListDemo {
         strings.get(0);
         strings.set(0,"qwe");
         strings.remove(0);
+        System.out.println(strings);
     }
 
     public static void doSmth(String str) {}
