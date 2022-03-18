@@ -1,12 +1,13 @@
 package collections.problem;
 
-import java.util.Objects;
+import java.util.*;
 
 public class TextAnalysis {
     // temp function for algo testing
     public static void main(String[] args) {
-        String s = " Mama myla ramu";
-        int wordBeg = 0;
+        String s = "foo Foo fOO FOO";
+        System.out.println(analyzeText(s));
+        /*int wordBeg = 0;
 
         for (;;) {
             int space = s.indexOf(' ', wordBeg);
@@ -22,7 +23,7 @@ public class TextAnalysis {
                 break;
             }
         }
-       // System.out.println(i);
+       // System.out.println(i);*/
     }
 
     public static class AnalysisResult {
@@ -41,7 +42,7 @@ public class TextAnalysis {
                 return true;
             if (o == null || getClass() != o.getClass())
                 return false;
-            AnalysisResult result = (AnalysisResult)o;
+            AnalysisResult result = (AnalysisResult)o;         // (AnalysisResult)o   --> what
             return totalWords == result.totalWords && uniqueWords == result.uniqueWords && uniqueWordsCaseInsensitive == result.uniqueWordsCaseInsensitive;
         }
 
@@ -51,9 +52,47 @@ public class TextAnalysis {
     }
 
     public static AnalysisResult analyzeText(String text) {
-        // write your solution here
-        return null;
+        String[] words = text.split(" ");
+        List<String> list = new ArrayList<>(Arrays.asList(words));
+        for (int i = 0; i < list.size()-1; i++) {
+            if(list.get(i).equals("")) {
+                list.remove(i);                              // why some elements with the value "" are not being deleted??
+            }
+        }
+
+        String[] copy = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            copy[i] = list.get(i);
+        }
+
+        long totalWords = copy.length;
+
+        long uniqueWords = copy.length;
+        for (int i = 0; i < copy.length-1; i++) {
+            for (int j = i+1; j < copy.length; j++) {
+                if(copy[i].equals(copy[j])) {
+                    uniqueWords--;
+                }
+            }
+        }
+
+        long uniqueWordsCaseInsensitive = copy.length;
+        for (int i = 0; i < copy.length-1; i++) {
+            for (int j = i+1; j < copy.length; j++) {
+                if(copy[i].equalsIgnoreCase(copy[j])) {
+                    uniqueWordsCaseInsensitive--;
+                }
+            }
+        }
+        if(uniqueWordsCaseInsensitive <= 0) {
+            uniqueWordsCaseInsensitive = 1;
+        }
+
+        return new AnalysisResult(totalWords,uniqueWords,uniqueWordsCaseInsensitive);
     }
 }
 
+
+// 1) Анализ текста программа. Ф-ия принимает одну строку. кот-ая содержит текст. Текст - набор из слов и пробелов. Слово - строка из больших и мал латинских букв и цифр.
+// Нужно вывести в консоль суммарное кол-во слов и суммарное кол-во уникальных слов и кол-во уникальных слов без учета регистра. Есть тесты на задачу.
 // пробел в начале, в конце, несколько пробелов -- обработать.
