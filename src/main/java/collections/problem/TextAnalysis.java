@@ -57,26 +57,24 @@ public class TextAnalysis {
 
     public static AnalysisResult analyzeText(String text) {
         String[] words = text.split(" ");
-        List<String> list = new ArrayList<>(Arrays.asList(words));
-        list.removeAll(Arrays.asList(""));
-        Set<String> hashSet = new LinkedHashSet(list);
-        ArrayList<String> removedDuplicates = new ArrayList(hashSet);
-
-        long totalWords = list.size();
-        long uniqueWords = removedDuplicates.size();
-        long uniqueWordsCaseInsensitive = countUniqueWordsCaseInsensitive(text);
-        return new AnalysisResult(totalWords,uniqueWords,uniqueWordsCaseInsensitive);
+        List<String> allWords = new ArrayList<>();
+        for(int i = 0; i < words.length; i++) {
+            if(words[i].length() != 0) {
+                allWords.add(words[i]);
+            }
+        }
+        Set<String> uniqueWords = new HashSet<>(allWords);
+        Set<String> uniqueWordsCaseInsensitive = new HashSet<>();
+        for (String s : uniqueWords) {
+            uniqueWordsCaseInsensitive.add(s.toLowerCase());
+        }
+        long totalWordCount = allWords.size();
+        long uniqueWordCount = uniqueWords.size();
+        long uniqueWordCountCaseInsensitive = uniqueWordsCaseInsensitive.size();
+        return new AnalysisResult(totalWordCount,uniqueWordCount,uniqueWordCountCaseInsensitive);
     }
 
-    public static long countUniqueWordsCaseInsensitive(String text){
-        String textLowCase = text.toLowerCase();
-        String[] wordsLowCase = textLowCase.split(" ");
-        List<String> list2 = new ArrayList<>(Arrays.asList(wordsLowCase));
-        list2.removeAll(Arrays.asList(""));
-        Set<String> hashSet2 = new LinkedHashSet(list2);
-        ArrayList<String> removedDuplicatesCaseInsensitive= new ArrayList(hashSet2);
-        return removedDuplicatesCaseInsensitive.size();
-    }
+
 }
 
 
