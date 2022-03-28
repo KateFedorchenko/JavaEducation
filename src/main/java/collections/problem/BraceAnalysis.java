@@ -5,9 +5,8 @@ import java.util.Deque;
 
 public class BraceAnalysis {
     public static void main(String[] args) {
-        String str = "({}[ab]2f{})";
-        System.out.println(isCorrectModification2(str));
-
+        String str = "([{]})";
+        System.out.println(isCorrectModification(str));
 
 //        String str = "(())";
 //        System.out.println(isCorrect(str));
@@ -17,12 +16,6 @@ public class BraceAnalysis {
 //        System.out.println(isCorrect(str3));
 //        String str4 = ")";
 //        System.out.println(isCorrect(str4));
-
-//        System.out.println(isCorrectModification1(str));
-//        String str2 = "({}{}{}[])";
-//        System.out.println(isCorrectModification1(str2));
-//        String str3 = "({}{}{}[])[)";
-//        System.out.println(isCorrectModification1(str3));
     }
 
     /**
@@ -53,102 +46,43 @@ public class BraceAnalysis {
      * The function analyzes str which contains three types of braces (),[],{} and returns the result true if sequence is correct.
      * For example, "(())" is correct, "(" is wrong, "(()(()))" is correct.
      */
-    public static boolean isCorrectModification1(String str){
+
+    public static boolean isCorrectModification(String str){
         char[] arr = str.toCharArray();
-        Deque<Character> stackForParentheses = new ArrayDeque<>();
-        Deque<Character> stackForCurlyBraces = new ArrayDeque<>();
-        Deque<Character> stackForSquareBraces = new ArrayDeque<>();
+        Deque<Character> stack = new ArrayDeque<>();
         for (int i = 0; i < arr.length; i++) {
-            if(arr[i] == '('){
-
-                stackForParentheses.push(arr[i]);
+            if(arr[i] == '(' || arr[i] == '[' || arr[i] == '{'){
+                stack.push(arr[i]);
             }
-            if(arr[i] == '{'){
-                stackForCurlyBraces.push(arr[i]);
-            }
-            if(arr[i] == '['){
-                stackForSquareBraces.push(arr[i]);
-            }
-
-
             if(arr[i] == ')'){
-                if(stackForParentheses.isEmpty()){
+                if(stack.isEmpty()){
                     return false;
                 }
-                char poppedChar = stackForParentheses.pop();
+                char poppedChar = stack.pop();
                 if(poppedChar != '('){
                     return false;
                 }
             }
             if(arr[i] == '}'){
-                if(stackForCurlyBraces.isEmpty()){
+                if(stack.isEmpty()){
                     return false;
                 }
-                char poppedChar = stackForCurlyBraces.pop();
+                char poppedChar = stack.pop();
                 if(poppedChar != '{'){
                     return false;
                 }
             }
             if(arr[i] == ']'){
-                if(stackForSquareBraces.isEmpty()){
+                if(stack.isEmpty()){
                     return false;
                 }
-                char poppedChar = stackForSquareBraces.pop();
+                char poppedChar = stack.pop();
                 if(poppedChar != '['){
                     return false;
                 }
             }
         }
-        return stackForParentheses.isEmpty() && stackForCurlyBraces.isEmpty() && stackForSquareBraces.isEmpty();
-    }
-
-    public static boolean isCorrectModification2(String str){
-        char[] arr = str.toCharArray();
-        Deque<Character> stackForParentheses = new ArrayDeque<>();
-        Deque<Character> stackForCurlyBraces = new ArrayDeque<>();
-        Deque<Character> stackForSquareBraces = new ArrayDeque<>();
-        for (int i = 0; i < arr.length; i++) {
-            if(arr[i] == '('){
-
-                stackForParentheses.push(arr[i]);
-            }
-            if(arr[i] == '{'){
-                stackForCurlyBraces.push(arr[i]);
-            }
-            if(arr[i] == '['){
-                stackForSquareBraces.push(arr[i]);
-            }
-
-
-            if(arr[i] == ')'){
-                if(stackForParentheses.isEmpty()){
-                    return false;
-                }
-                char poppedChar = stackForParentheses.pop();
-                if(poppedChar != '('){
-                    return false;
-                }
-            }
-            if(arr[i] == '}'){
-                if(stackForCurlyBraces.isEmpty()){
-                    return false;
-                }
-                char poppedChar = stackForCurlyBraces.pop();
-                if(poppedChar != '{'){
-                    return false;
-                }
-            }
-            if(arr[i] == ']'){
-                if(stackForSquareBraces.isEmpty()){
-                    return false;
-                }
-                char poppedChar = stackForSquareBraces.pop();
-                if(poppedChar != '['){
-                    return false;
-                }
-            }
-        }
-        return stackForParentheses.isEmpty() && stackForCurlyBraces.isEmpty() && stackForSquareBraces.isEmpty();
+        return stack.isEmpty();
     }
 }
 
