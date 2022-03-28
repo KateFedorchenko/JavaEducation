@@ -46,7 +46,7 @@ public class BraceAnalysisTest {
     @ParameterizedTest
     @MethodSource
     public void shouldFindSum() {
-        int[] res = BraceAnalysis.isCorrectModification(str);
+        //int[] res = BraceAnalysis.isCorrectModification(str);
 
     }
 }
