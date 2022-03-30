@@ -5,7 +5,7 @@ import java.util.Deque;
 
 public class BraceAnalysis {
     public static void main(String[] args) {
-        String str = "([{]})";
+        String str = "([w{2]})";
         System.out.println(isCorrectModification(str));
 
 //        String str = "(())";
