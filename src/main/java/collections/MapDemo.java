@@ -32,12 +32,18 @@ public class MapDemo {
         map.values(); // Collection<V>                           // VIEW
 
         // HW: итерация через  map.values()  --> надо найти самое первое и самое последнее слвоо по алфавиту
-        List<String> mapValues = new ArrayList<>(map.values());
-        Collections.sort(mapValues);
+        List<String> mapValues = new ArrayList<>(map.values()); // extra space needed -> bad    O(n)
+        Collections.sort(mapValues);                            // time complexity -> bad       O(nlogn)  + extra space needed -> bad    O(n)
         String first = mapValues.get(0);
         System.out.println("The first word is " + first);
         String last = mapValues.get(mapValues.size()-1);
         System.out.println("The last word is " + last);
+
+
+        //TODO
+        for (String value : map.values()) {                   // better to use
+
+        }
     }
 
     public void searchMap() {
@@ -49,35 +55,28 @@ public class MapDemo {
     }
 
 
-    // HW1 completed below --> 1 question there
-    public static void task() throws Exception{                                   // TODO!!!!!!
+
+    public static void task() throws Exception{
         Map<String, Integer> map = new HashMap<>();
         map.put("zero", 0);
         map.put("one", 1);
         map.put("two", 2);
         map.put("three", 3);
         map.put("four", 4);
-        String[] key = map.keySet().toArray(new String[0]);  // found that .toArray(String[]::new) equals to .toArray(new String[0])  --> what is String[]::new? Need explanation
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please, provide the first digit and press Enter");
         String first = scanner.nextLine();
-        throwException(key,first);
+        throwException(map,first);
         System.out.println("Please, provide the second digit and press Enter");
         String second = scanner.nextLine();
-        throwException(key,second);
+        throwException(map,second);
         int firstNum = map.get(first);
         int secondNum = map.get(second);
         System.out.println("Your sum is " + (firstNum + secondNum));  //0+1 = 1
-        searchMapWithKeyAndValue();
     }
 
-    public static void throwException(String[] key, String word) throws Exception{
-        boolean result = false;
-        for (int i = 0; i < key.length; i++) {
-            if(word.equals(key[i])) {
-                result = true;
-            }
-        }
+    public static void throwException(Map<String,Integer> map, String word) throws Exception{
+        boolean result = map.containsKey(word);
         if(!result) {
             throw new Exception("Your digit is wrong! No value in map to be found with such key");
         }
