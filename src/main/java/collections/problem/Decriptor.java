@@ -11,15 +11,14 @@ import java.util.Map;
  */
 public class Decriptor {
     public static void main(String[] args) throws Exception {
-        decrypt("kbwb");
-    }
-
-    public static String decrypt(String str) throws Exception{
         Map<Character, Character> map = new HashMap<>();
         for (int i = 0; i <= 25; i++) {
             map.put((char) ('b' + i), (char) ('a' + i));
         }
+        decrypt("kbwb",map);
+    }
 
+    public static String decrypt(String str, Map map) throws Exception{
         char[] chars = new char[str.length()];           // String to be converted to char array
         for (int i = 0; i < str.length(); i++) {
             chars[i] = str.charAt(i);
