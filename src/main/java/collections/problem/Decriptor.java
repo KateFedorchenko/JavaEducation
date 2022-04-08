@@ -33,8 +33,7 @@ public class Decriptor {
         }
 
         for (int i = 0; i < chars.length; i++) {            // check if there is any char that cannot be decrypted
-            if (map.containsKey(chars[i])) {
-            } else {
+            if (!map.containsKey(chars[i])) {
                 throw new RuntimeException("Your string cannot be decrypted - no such character for key has been found");
             }
         }
