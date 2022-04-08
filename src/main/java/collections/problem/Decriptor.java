@@ -12,13 +12,21 @@ import java.util.Map;
 public class Decriptor {
     public static void main(String[] args) throws Exception {
         Map<Character, Character> map = new HashMap<>();
-        for (int i = 0; i <= 25; i++) {
+        for (int i = 0; i < 25; i++) {
+            if(i == 24){
+                map.put('a','z');
+            }
             map.put((char) ('b' + i), (char) ('a' + i));
         }
-        decrypt("kbwb",map);
+        map.put(' ',' ');
+        map.put('.','.');
+        map.put(',',',');
+        System.out.println(map);
+        decrypt("jo dpnqvujoh, b ibti ubcmf jt b ebub tusvduvsf uibu jnqmfnfout bo bttpdjbujwf bssbz bctusbdu ebub uzqf, b tusvduvsf uibu dbo nbq lfzt up wbmvft.",map);
     }
 
-    public static String decrypt(String str, Map map) throws Exception{
+
+    public static String decrypt(String str,Map map) throws Exception {
         char[] chars = new char[str.length()];           // String to be converted to char array
         for (int i = 0; i < str.length(); i++) {
             chars[i] = str.charAt(i);
