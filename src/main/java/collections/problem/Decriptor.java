@@ -1,6 +1,7 @@
 package collections.problem;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class Decriptor {
             objectArray[i] = map.get(chars[i]);
         }
         //String[] strings = (String[]) objectArray[0];       // ClassCastException
-        return objectArray.toString();                        // toString(Obj[] o) should convert my Object array to a String --> but it does not- why?
+        return Arrays.toString(objectArray);                        // toString(Obj[] o) should convert my Object array to a String --> but it does not- why?
     }
 
 }
