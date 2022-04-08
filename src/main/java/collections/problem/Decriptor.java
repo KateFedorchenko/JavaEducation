@@ -11,7 +11,7 @@ import java.util.Map;
  * return расшифрованный текст.
  */
 public class Decriptor {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args){
         Map<Character, Character> map = new HashMap<>();
         for (int i = 0; i < 25; i++) {
             if (i == 24) {
@@ -26,7 +26,7 @@ public class Decriptor {
         System.out.println(decrypt(str, map));
     }
 
-    public static String decrypt(String str, Map map) throws Exception {
+    public static String decrypt(String str, Map map){
         char[] chars = new char[str.length()];               // String to be converted to char array
         for (int i = 0; i < str.length(); i++) {
             chars[i] = str.charAt(i);
@@ -35,7 +35,7 @@ public class Decriptor {
         for (int i = 0; i < chars.length; i++) {            // check if there is any char that cannot be decrypted
             if (map.containsKey(chars[i])) {
             } else {
-                throw new Exception("Your string cannot be decrypted - no such character for key has been found");
+                throw new RuntimeException("Your string cannot be decrypted - no such character for key has been found");
             }
         }
         Object[] objectArray = new Object[chars.length];
