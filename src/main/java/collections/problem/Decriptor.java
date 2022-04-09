@@ -26,7 +26,7 @@ public class Decriptor {
         System.out.println(decrypt(str, map));
     }
 
-    public static String decrypt(String str, Map map){
+    public static String decrypt(String str, Map<Character,Character> map){
         char[] chars = new char[str.length()];               // String to be converted to char array
         for (int i = 0; i < str.length(); i++) {
             chars[i] = str.charAt(i);
@@ -37,12 +37,11 @@ public class Decriptor {
                 throw new RuntimeException("Your string cannot be decrypted - no such character for key has been found");
             }
         }
-        Object[] objectArray = new Object[chars.length];
+        char[] objectArray = new char[chars.length];
         for (int i = 0; i < chars.length; i++) {
             objectArray[i] = map.get(chars[i]);
         }
-        //String[] strings = (String[]) objectArray[0];       // ClassCastException
-        return Arrays.toString(objectArray);                        // toString(Obj[] o) should convert my Object array to a String --> but it does not- why?
+        return new String(objectArray);                        // toString(Obj[] o) should convert my Object array to a String --> but it does not- why?
     }
 
 }
