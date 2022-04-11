@@ -5,9 +5,10 @@ import java.util.Arrays;
 
 public class ArraysAdvancedDemo {
     public static void main(String[] args) {
-        int[] arr = new int[]{-10,-9,-8,-7,-6,-5,-3,-1,0,8};
-        int res = binarySearch(arr, 0, arr.length, -2);
-        System.out.println(res);
+        int[] arr = new int[]{2,3,1,4};
+        System.out.println(insertionSorting(arr));
+//        int res = binarySearch(arr, 0, arr.length, -2);
+//        System.out.println(res);
         //System.out.println(res);
         //int[] arr2 = new int[]{2,1,3};
         //swapBubble(arr2);
