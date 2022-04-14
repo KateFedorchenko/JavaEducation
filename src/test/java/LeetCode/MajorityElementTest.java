@@ -19,6 +19,7 @@ class MajorityElementTest {
                 arguments(new int[]{4,4,4,1,1,4},4),
                 arguments(new int[]{1,2,3,4,5,5,1,1},1),
                 arguments(new int[]{1,5,5},5),
+                arguments(new int[]{1},1),
                 arguments(new int[]{2,2,2,3,3,3,1,2},2)
         );
     }
