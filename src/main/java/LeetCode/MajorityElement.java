@@ -2,7 +2,7 @@ package LeetCode;
 
 public class MajorityElement {
     public static void main(String[] args) {
-        int[] arr = new int[]{3,2,3};
+        int[] arr = new int[]{3,3,2,3,2};
         System.out.println(findMajorityElement(arr));
     }
 
