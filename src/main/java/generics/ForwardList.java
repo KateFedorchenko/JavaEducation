@@ -23,16 +23,8 @@ public class ForwardList<T> implements Iterable<T> {
             this.next = next;
         }
 
-        public Node getNext() {
-            return next;
-        }
-
         public boolean hasNext() {
             return next != null;
-        }
-
-        public T getVal() {
-            return val;
         }
 
     }
@@ -49,10 +41,10 @@ public class ForwardList<T> implements Iterable<T> {
     /**
      * @return size of the list.
      */
-    public int size() {                // size should be counted in 'int', no? Why T?
+    public int size() {
         Node temp = head;
         int count = 0;
-        while(temp != null){
+        while (temp != null) {
             count++;
             temp = temp.next;
         }
@@ -75,38 +67,38 @@ public class ForwardList<T> implements Iterable<T> {
      * Places new element to the front of the list.
      */
     public void push(T newElement) {
-        if (head == null) {
-            head = new Node(newElement);
-        } else {
-            head = new Node(newElement,head);
-        }
+        head = new Node(newElement, head);
     }
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder sb = new StringBuilder();
         for (Node cur = head; cur != null; cur = cur.next) {
-            str = str + cur.val.toString()+ " -> ";
+            sb.append(cur.val).append(" ->");
         }
-        return str;
+        return sb.toString();
     }
 
-    @Override public Iterator<T> iterator() {
-        return new ForwardListIterator<>();
+    @Override
+    public Iterator<T> iterator() {
+        return new ForwardListIterator();
     }
 
 
-    private class ForwardListIterator<T> implements Iterator<T> {
-        private Node head;
+    private class ForwardListIterator implements Iterator<T> {
+        private Node cur = head;
 
 
-        @Override public boolean hasNext() {
-            return head.hasNext();
+        @Override
+        public boolean hasNext() {
+            return cur != null;
         }
 
-        @Override public T next() {
-            //return head.getNext().getVal(); // why?
-            return null;
+        @Override
+        public T next() {
+            T res = cur.val;
+            cur = cur.next;
+            return res;
         }
     }
 }

@@ -17,9 +17,12 @@ public class ForwardListHW {
         list.removeFront();
         System.out.println(list.toString());
 
+        ForwardList<Integer> ints = new ForwardList<>();
+        ints.push(1);
 
-//        ForwardList<Integer> ints = new ForwardList<>();
-//        list.push(1);                                         // why 1 is not ok here?
+        for (String x : list){
+            System.out.println(x);
+        }
 
     }
 }
