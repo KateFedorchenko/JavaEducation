@@ -9,7 +9,6 @@ import java.util.*;
  * @param <T>
  */
 public class ForwardList<T> implements Iterable<T> {
-
     private class Node {
         private T val;
         private Node next;
@@ -28,7 +27,6 @@ public class ForwardList<T> implements Iterable<T> {
         }
 
     }
-
     private Node head;
 
     /**
@@ -70,6 +68,28 @@ public class ForwardList<T> implements Iterable<T> {
         head = new Node(newElement, head);
     }
 
+    /**
+     * Adds all element from Iterable parameter.
+     */
+    public void addAll(List<T> it){
+        Iterator<T> iterator = it.iterator();
+        while(iterator.hasNext()) {
+            T element = iterator.next();
+            this.push(element);
+        }
+    }
+
+    /**
+     * @return all elements in a form of java.util.ArrayList
+     */
+    public ArrayList<T> getAllList(){
+        ArrayList<T> arrayList = new ArrayList<>();
+        for (T x : this) {
+            arrayList.add(x);
+        }
+        return arrayList;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -83,7 +103,6 @@ public class ForwardList<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         return new ForwardListIterator();
     }
-
 
     private class ForwardListIterator implements Iterator<T> {
         private Node cur = head;
