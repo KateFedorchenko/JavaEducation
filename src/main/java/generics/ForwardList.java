@@ -71,11 +71,9 @@ public class ForwardList<T> implements Iterable<T> {
     /**
      * Adds all element from Iterable parameter.
      */
-    public void addAll(List<T> it){
-        Iterator<T> iterator = it.iterator();
-        while(iterator.hasNext()) {
-            T element = iterator.next();
-            this.push(element);
+    public void addAll(List<? extends T> it){
+        for (T t : it) {
+            push(t);
         }
     }
 

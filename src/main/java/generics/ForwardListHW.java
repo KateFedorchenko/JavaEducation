@@ -25,17 +25,28 @@ public class ForwardListHW {
 //        for (String x : list){
 //            System.out.println(x);
 //        }
+//
+        {
+            List<String> it = new ArrayList<>();
+            it.add("car");
+            it.add("cap");
+            it.add("sap");
+            it.add("rap");
+            ForwardList<String> list = new ForwardList<>();
+            list.addAll(it);
+            System.out.println(list.toString());
 
-        List<String> it = new ArrayList<>();
-        it.add("car");
-        it.add("cap");
-        it.add("sap");
-        it.add("rap");
-        ForwardList<String> list = new ForwardList<>();
-        list.addAll(it);
-        System.out.println(list.toString());
+            System.out.println(list.getAllList());      // convert to ArrayList
 
+            ForwardList<Number> l = new ForwardList<>();
+            ArrayList<Double> a = new ArrayList<>();
+            l.addAll(a);
+            l.push(Double.valueOf(1.0));
+        }
 
-        System.out.println(list.getAllList());      // convert to ArrayList
+        {
+            ForwardList<Integer> l = new ForwardList<>();
+            List<Number> d = new ArrayList<>(l.getAllList());
+        }
     }
 }
