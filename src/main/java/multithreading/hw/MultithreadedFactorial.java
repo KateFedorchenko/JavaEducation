@@ -7,33 +7,9 @@ import java.util.List;
 
 public class MultithreadedFactorial {
     public static void main(String[] args) throws Exception {
-        int factorial = 2;
-        int threadCount = 2;
-        int chunkSize = factorial / threadCount;
-
-        List<MyFactorialThread> threads = new ArrayList<>();
-
-        for (int i = 0; i < threadCount; i++) {
-            MyFactorialThread t;
-            if (i == threadCount - 1) {
-                t = new MyFactorialThread(chunkSize*i,factorial+1); //!
-            } else {
-                t = new MyFactorialThread(chunkSize*i,chunkSize*(i+1)); //!
-            }
-            t.start();
-            threads.add(t);
-        }
-
-        for (int i = 0; i < threadCount; i++) {
-            threads.get(i).join();
-        }
-
-        long result = 0;
-        for (int i = 0; i < threadCount; i++) {
-            result += threads.get(i).getRes();          // hard to understand what it is for :/
-        }
-        System.out.println("result = " + result);
-        System.out.println("getFactorialMultithreaded() = " + getFactorialMultithreaded(factorial,threadCount));
+        long currentTime = System.currentTimeMillis();
+        System.out.println("getFactorialMultithreaded(5,1) = " + getFactorialMultithreaded(10000, 4));
+        System.out.println(System.currentTimeMillis() - currentTime);
     }
 
     /**
@@ -44,16 +20,27 @@ public class MultithreadedFactorial {
      * @param threadCount Number of thread need to be spawned for this task.
      * @return result of fact calculation.
      */
-    public static BigInteger getFactorialMultithreaded(int n, int threadCount) {    // why do I need here the param threadCount?
-        if (n == 0) {
-            return BigInteger.ZERO;
-        }
+    public static BigInteger getFactorialMultithreaded(int n, int threadCount) throws Exception{
         if (n < 2) {
             return BigInteger.ONE;
         }
+        int chunkSize = n / threadCount;            // how many operations per one thread
+        List<MyFactorialThread> threads = new ArrayList<>();
+        for (int i = 0; i < threadCount; i++) {     // create threads
+            int end;
+            if(i == threadCount - 1) {
+                end = n + 1;
+            } else {
+                end = chunkSize * (i + 1);
+            }
+            MyFactorialThread f = new MyFactorialThread(chunkSize * i, end);
+            f.start();
+            threads.add(f);
+        }
         BigInteger factorial = BigInteger.ONE;
-        for (int i = n; i > 0; i--) {
-            factorial = factorial.multiply(BigInteger.valueOf(i));
+        for (MyFactorialThread thread : threads) {
+            thread.join();                              // blocks the main thread until other thread is working
+            factorial = factorial.multiply(thread.getRes());
         }
         return factorial;
     }
@@ -62,33 +49,23 @@ public class MultithreadedFactorial {
     public static class MyFactorialThread extends Thread {
         int from;
         int to;
-
-        long res;
+        BigInteger res = BigInteger.ONE;
 
         public MyFactorialThread(int from, int to) {
             this.from = from;
             this.to = to;
         }
 
-        public long getRes() {
+        public BigInteger getRes() {
             return res;
         }
 
         @Override
         public void run() {
+            int from = Math.max(this.from,1);       // 'from' can be 0
             for (int i = from; i < to; i++) {
-                res += i;
+                res = res.multiply(BigInteger.valueOf(i));
             }
-        }
-    }
-
-    static class MyThread extends Thread {
-        public MyThread(){
-            super("MyAwesomeThread");
-        }
-        @Override
-        public void run(){
-            System.out.println("hello from another thread!");
         }
     }
 }
