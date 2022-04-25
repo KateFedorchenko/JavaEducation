@@ -20,7 +20,7 @@ public class MultithreadedFactorial {
      * @param threadCount Number of thread need to be spawned for this task.
      * @return result of fact calculation.
      */
-    public static BigInteger getFactorialMultithreaded(int n, int threadCount) throws Exception{
+    public static BigInteger getFactorialMultithreaded(int n, int threadCount) throws Exception {
         if (n < 2) {
             return BigInteger.ONE;
         }
@@ -28,7 +28,7 @@ public class MultithreadedFactorial {
         List<MyFactorialThread> threads = new ArrayList<>();
         for (int i = 0; i < threadCount; i++) {     // create threads
             int end;
-            if(i == threadCount - 1) {
+            if (i == threadCount - 1) {
                 end = n + 1;
             } else {
                 end = chunkSize * (i + 1);
@@ -62,10 +62,11 @@ public class MultithreadedFactorial {
 
         @Override
         public void run() {
-            int from = Math.max(this.from,1);       // 'from' can be 0
+            int from = Math.max(this.from, 1);       // 'from' can be 0
             for (int i = from; i < to; i++) {
                 res = res.multiply(BigInteger.valueOf(i));
             }
         }
     }
 }
+
