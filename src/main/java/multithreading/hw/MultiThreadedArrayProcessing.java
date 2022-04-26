@@ -1,10 +1,7 @@
 package multithreading.hw;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MultiThreadedArrayProcessing {
@@ -25,7 +22,7 @@ public class MultiThreadedArrayProcessing {
     /**
      * Returns index of the largest element in array;
      */
-    public static int findLargestElementIndexMultiThreaded(int[] arr, int threadCount) throws Exception{
+    public static int findLargestElementIndexMultiThreaded(int[] arr, int threadCount){
         int size = arr.length;
         int range = size / threadCount;
 
@@ -33,20 +30,25 @@ public class MultiThreadedArrayProcessing {
         for (int i = 0; i < threadCount; i++) {
             int startAt = i * range;
             int endAt = startAt + range;
-            FindMaxElementIndex f = new FindMaxElementIndex(arr,startAt,endAt);
-            f.start();
-            threads.add(f);
+            Thread t = new Thread(new FindMaxElementIndex(arr,startAt,endAt));
+            //FindMaxElementIndex f = new FindMaxElementIndex(arr,startAt,endAt);
+            t.start();
+//          threads.add(t);                                                                  //TODO ????
         }
 
-        for (FindMaxElementIndex thread : threads) {
-            thread.join();
-//            getMax() ????
+        int maximum = 0;
+        int maxIdx = 0;
+        for (int i = 0; i < threads.size(); i++) {
+//            threads.join();                                                              //TODO ????
+            if (maximum < threads.get(i).getMax())
+                maximum = threads.get(i).getMax();
+                maxIdx = threads.get(i).getIdx();
         }
-        return 0;
+        return maxIdx;
     }
 
 
-    public static class FindMaxElementIndex extends Thread implements Runnable {        // ok?
+    public static class FindMaxElementIndex implements Runnable {
         private int startIndex;
         private int endIndex;
         private int[] array;
@@ -64,6 +66,10 @@ public class MultiThreadedArrayProcessing {
             return max;
         }
 
+        public int getIdx() {
+            return idx;
+        }
+
         @Override
         public void run() {
             for (int i = startIndex; i < endIndex; i++) {
@@ -73,6 +79,5 @@ public class MultiThreadedArrayProcessing {
                 }
             }
         }
-
     }
 }
