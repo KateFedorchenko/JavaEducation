@@ -6,8 +6,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MultiThreadedArrayProcessing {
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         int[] randomArr = generateArray(10);
+        System.out.println(Arrays.toString(randomArr));
         System.out.println(findLargestElementIndexMultiThreaded(randomArr, 4));
     }
 
@@ -22,27 +23,33 @@ public class MultiThreadedArrayProcessing {
     /**
      * Returns index of the largest element in array;
      */
-    public static int findLargestElementIndexMultiThreaded(int[] arr, int threadCount){
+    public static int findLargestElementIndexMultiThreaded(int[] arr, int threadCount) throws Exception {
         int size = arr.length;
         int range = size / threadCount;
-
-        List<FindMaxElementIndex> threads = new ArrayList<>();
+        List<Thread> threads = new ArrayList<>();
+        List<FindMaxElementIndex> tasks = new ArrayList<>();
         for (int i = 0; i < threadCount; i++) {
             int startAt = i * range;
-            int endAt = startAt + range;
-            Thread t = new Thread(new FindMaxElementIndex(arr,startAt,endAt));
-            //FindMaxElementIndex f = new FindMaxElementIndex(arr,startAt,endAt);
+            int endAt;
+            if(i == threadCount-1){
+                endAt = size;
+            } else {
+                endAt = startAt+range;
+            }
+            FindMaxElementIndex f = new FindMaxElementIndex(arr, startAt, endAt);
+            Thread t = new Thread(f);
             t.start();
-//          threads.add(t);                                                                  //TODO ????
+            threads.add(t);
+            tasks.add(f);
         }
-
         int maximum = 0;
         int maxIdx = 0;
         for (int i = 0; i < threads.size(); i++) {
-//            threads.join();                                                              //TODO ????
-            if (maximum < threads.get(i).getMax())
-                maximum = threads.get(i).getMax();
-                maxIdx = threads.get(i).getIdx();
+            threads.get(i).join();
+            if (maximum < tasks.get(i).getMax()) {
+                maximum = tasks.get(i).getMax();
+                maxIdx = tasks.get(i).getIdx();
+            }
         }
         return maxIdx;
     }
