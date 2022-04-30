@@ -25,37 +25,43 @@ public class MultithreadingWordStatistics {
      * Result: {"ad": 2, "infinum":1, "per":1, "dura":1, "lex":2, "sed":1,"aspera":1, "astra":1}
      */
     public static Map<String, Integer> getWordStatisticsMT(String text, int threadCount) throws Exception {
-        String[] arrOfStrings = text.toLowerCase().split(" ");
-        Map<String, Integer> map = new HashMap();
-        if (text == null || arrOfStrings.length == 1) {
-            System.out.println("The input is null or contains no more than one single word");
-            return null;
-        }
-        List<HashMap<String, Integer>> list = new ArrayList<>();        // correct?
+        Map<String,Integer> map = new HashMap<>();
+        String[] arr = text.toLowerCase().split(" ");
         Object mutex = new Object();
         List<Thread> threads = new ArrayList<>();
 
         for (int x = 0; x < threadCount; x++) {
+            int batchSize = arr.length / threadCount;
+            int start = batchSize * x;
+            int end = (x == threadCount - 1) ? arr.length : start + batchSize;
+
             Runnable r = new Runnable() {
                 @Override
                 public void run() {
-                    for (int i = 0; i < arrOfStrings.length; i++) {
-                        map.put(arrOfStrings[i], map.getOrDefault(arrOfStrings[i], 0) + 1);
+                    for (int i = start; i < end; i++) {
 
-                        synchronized (mutex) {
-//                            list.add(map.get(arrOfStrings[i]),);
-                            list.get(i);
+                        synchronized (mutex){
+                            map.put(arr[i],map.getOrDefault(arr[i],0) + 1);
                         }
                     }
                 }
             };
+            Thread t = new Thread(r);
+            t.start();
+            threads.add(t);
         }
-        Thread t = new Thread();
-        t.start();
-        threads.add(t);
-
-        for(Thread thread : threads){
+        for (Thread thread : threads) {
             thread.join();
+        }
+        return map;
+    }
+
+    public static Map<String, Integer> getWordStatistics(String text){
+        Map<String,Integer> map = new HashMap<>();
+        String[] arr = text.toLowerCase().split(" ");
+
+        for (int i = 0; i < arr.length; i++) {
+            map.put(arr[i],map.getOrDefault(arr[i],0)+1);
         }
         return map;
     }

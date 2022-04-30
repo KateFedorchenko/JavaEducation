@@ -24,6 +24,7 @@ class MultithreadingWordStatisticsTest {
                 )),
                 arguments("dura LEX SED lex", Map.ofEntries(
                         entry("dura", 1),
+                        entry("sed", 1),
                         entry("lex", 2)
                 ))
         );
