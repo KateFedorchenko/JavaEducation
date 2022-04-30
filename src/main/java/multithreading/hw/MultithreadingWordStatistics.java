@@ -27,7 +27,6 @@ public class MultithreadingWordStatistics {
     public static Map<String, Integer> getWordStatisticsMT(String text, int threadCount) throws Exception {
         Map<String,Integer> map = new HashMap<>();
         String[] arr = text.toLowerCase().split(" ");
-        Object mutex = new Object();
         List<Thread> threads = new ArrayList<>();
 
         for (int x = 0; x < threadCount; x++) {
@@ -40,7 +39,7 @@ public class MultithreadingWordStatistics {
                 public void run() {
                     for (int i = start; i < end; i++) {
 
-                        synchronized (mutex){
+                        synchronized (map){
                             map.put(arr[i],map.getOrDefault(arr[i],0) + 1);
                         }
                     }
