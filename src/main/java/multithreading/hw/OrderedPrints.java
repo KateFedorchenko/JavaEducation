@@ -2,6 +2,9 @@ package multithreading.hw;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicIntegerArray;
 
 /**
  * Change only methods foo() bar() and qwe() and add necessary fields so current program will always print next sequence:
@@ -10,16 +13,32 @@ import java.util.concurrent.ThreadLocalRandom;
  * qwe
  */
 public class OrderedPrints {
+    private final AtomicInteger order = new AtomicInteger(0);
+    Runnable r = new Runnable() {
+        @Override
+        public void run() {
+            foo();
+            bar();
+            qwe();
+        }
+    };
+
     void foo() {
-        System.out.println("foo");
+        if(order.compareAndSet(0,1)){
+            System.out.println("foo");
+        }
     }
 
     void bar() {
-        System.out.println("bar");
+        if(order.compareAndSet(1,2)){
+            System.out.println("bar");
+        }
     }
 
     void qwe() {
-        System.out.println("qwe");
+        if(order.compareAndSet(2,0)){
+            System.out.println("qwe");
+        }
     }
 
     static void sleepRandomTime() {
