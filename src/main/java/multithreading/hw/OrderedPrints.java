@@ -29,11 +29,13 @@ public class OrderedPrints{
     void foo() {
         while(true) {
             try{
-                if(order.compareAndSet(1,2)){
-                    System.out.println("foo");
-                    order.notify();
-                } else {
-                    order.wait();
+                synchronized(order){
+                    if(order.compareAndSet(1,2)){
+                        System.out.println("foo");
+                        order.notify();
+                    } else {
+                        order.wait();
+                    }
                 }
             } catch(InterruptedException e) {
                 throw new RuntimeException(e);
@@ -44,11 +46,13 @@ public class OrderedPrints{
     void bar() {
         while(true) {
             try{
-                if(order.compareAndSet(2,3)){
-                    System.out.println("bar");
-                    order.notify();
-                } else {
-                    order.wait();
+                synchronized(order) {
+                    if(order.compareAndSet(2,3)){
+                        System.out.println("bar");
+                        order.notify();
+                    } else {
+                        order.wait();
+                    }
                 }
             } catch(InterruptedException e) {
                 throw new RuntimeException(e);
@@ -59,12 +63,15 @@ public class OrderedPrints{
     void qwe() {
         while(true) {
             try{
-                if(order.compareAndSet(3,1)){
-                    System.out.println("qwe");
-                    order.notify();
-                } else {
-                    order.wait();
+                synchronized(order) {
+                    if(order.compareAndSet(3,4)){
+                        System.out.println("qwe");
+                        order.notify();
+                    } else {
+                        order.wait();
+                    }
                 }
+
             } catch(InterruptedException e) {
                 throw new RuntimeException(e);
             }
