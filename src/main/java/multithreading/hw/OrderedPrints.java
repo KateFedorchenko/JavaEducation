@@ -1,5 +1,7 @@
 package multithreading.hw;
 
+import beginner.InterfaceTask1;
+
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -12,8 +14,8 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
  * bar
  * qwe
  */
-public class OrderedPrints {
-    private final AtomicInteger order = new AtomicInteger(0);
+public class OrderedPrints{
+    private final AtomicInteger order = new AtomicInteger(1);
     Runnable r = new Runnable() {
         @Override
         public void run() {
@@ -23,21 +25,49 @@ public class OrderedPrints {
         }
     };
 
+
     void foo() {
-        if(order.compareAndSet(0,1)){
-            System.out.println("foo");
+        while(true) {
+            try{
+                if(order.compareAndSet(1,2)){
+                    System.out.println("foo");
+                    order.notify();
+                } else {
+                    order.wait();
+                }
+            } catch(InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     void bar() {
-        if(order.compareAndSet(1,2)){
-            System.out.println("bar");
+        while(true) {
+            try{
+                if(order.compareAndSet(2,3)){
+                    System.out.println("bar");
+                    order.notify();
+                } else {
+                    order.wait();
+                }
+            } catch(InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     void qwe() {
-        if(order.compareAndSet(2,0)){
-            System.out.println("qwe");
+        while(true) {
+            try{
+                if(order.compareAndSet(3,1)){
+                    System.out.println("qwe");
+                    order.notify();
+                } else {
+                    order.wait();
+                }
+            } catch(InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
