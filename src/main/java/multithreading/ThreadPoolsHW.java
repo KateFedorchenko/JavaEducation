@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.concurrent.*;
 
 public class ThreadPoolsHW {
-    static ExecutorService executorService = Executors.newFixedThreadPool(20);
+    static ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());      // >12  not ok
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         Callable<BigDecimal> fib = new Callable<BigDecimal>() {
@@ -15,6 +15,7 @@ public class ThreadPoolsHW {
         };
         Future<BigDecimal> fut = executorService.submit(fib);
         System.out.println(fut.get());
+        System.out.println(Runtime.getRuntime().availableProcessors()); // logical cores = 12
         executorService.shutdown();
     }
 
