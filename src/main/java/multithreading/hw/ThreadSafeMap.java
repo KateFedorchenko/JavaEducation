@@ -10,7 +10,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ThreadSafeMap<K, V> {
     Map<K, V> threadSafeMap;
-    static ExecutorService executorService = Executors.newFixedThreadPool(4);
     ReadWriteLock globalLock = new ReentrantReadWriteLock();
 
     public ThreadSafeMap() {
@@ -54,6 +53,7 @@ public class ThreadSafeMap<K, V> {
     }
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
         Runnable r = () -> {
             ThreadSafeMap<Integer,String> map = new ThreadSafeMap<>();
             map.put(0,"f");
