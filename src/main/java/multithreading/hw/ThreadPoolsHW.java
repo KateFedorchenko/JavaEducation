@@ -1,4 +1,4 @@
-package multithreading;
+package multithreading.hw;
 
 import java.math.BigDecimal;
 import java.util.concurrent.*;
