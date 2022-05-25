@@ -9,7 +9,6 @@ public class NTimeDoer implements Runnable {
     static CountDownLatch latch;
     static ExecutorService executorService = Executors.newFixedThreadPool(5);
 
-
     public NTimeDoer(int n, Runnable r) throws Exception {
         if (n < 0) {
             throw new Exception("n cannot be 0");
