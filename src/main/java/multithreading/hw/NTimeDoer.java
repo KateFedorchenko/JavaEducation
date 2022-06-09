@@ -1,50 +1,31 @@
 package multithreading.hw;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class NTimeDoer implements Runnable {
+
+public class NTimeDoer {
+    AtomicInteger counter = new AtomicInteger(0);
     Runnable r;
-    static CountDownLatch latch;
-    static ExecutorService executorService = Executors.newFixedThreadPool(5);
+    int n;
 
-    public NTimeDoer(int n, Runnable r) throws Exception {
-        if (n < 0) {
-            throw new Exception("n cannot be 0");
+    public NTimeDoer(int n, Runnable r) throws RuntimeException {
+        if (n <= 0) {
+            throw new RuntimeException("n cannot be less than 0");
         }
-        latch = new CountDownLatch(n);
+        this.n = n;
         this.r = r;
     }
 
-    @Override
-    public void run() {
-        try {
-            executorService.submit(() -> {
-                try {
-                    latch.countDown();
-                    doIt();
-                    latch.await();
-                    System.out.println("Finished!");
-                    executorService.shutdown();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-        } catch (Exception e) {
-            executorService.shutdown();
-            e.printStackTrace();
-        }
-    }
-
-
     public void doIt() {
-        try {
-            System.out.println("Start!");
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        int i;
+        do {
+            i = counter.get();
+            if (i < n && counter.compareAndSet(i, i + 1)) {  // the best atomic method
+                r.run();//throws Exception
+                break;
+                
+            }
+        } while (i < n);
     }
 }
 
