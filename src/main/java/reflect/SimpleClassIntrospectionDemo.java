@@ -51,9 +51,9 @@ public class SimpleClassIntrospectionDemo {
                 if (type.isPrimitive()){
                     sb.append(declaredField.get(o));
                 } else if(type.equals(String.class)){
-                    sb.append("\'").append(declaredField.get(o)).append("\'");
+                    sb.append("'").append(declaredField.get(o)).append("'");
                 } else {
-                    sb.append(type).append("'").append(declaredField.get(o)).append("'");
+                    sb.append(type.getName()).append("'").append(declaredField.get(o)).append("'");
                 }
                 sb.append(", ");
             }
