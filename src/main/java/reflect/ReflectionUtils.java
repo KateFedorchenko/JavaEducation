@@ -50,7 +50,7 @@ public class ReflectionUtils {
         try {
             for (int i = 0; i < declaredFieldsLhs.length; i++) {
                 for (int j = 0; j < declaredFieldsRhs.length; j++) {
-                    if(!declaredFieldsLhs[i].get(lhs).equals(declaredFieldsRhs[i].get(rhs))){
+                    if(!declaredFieldsLhs[i].get(lhs).equals(declaredFieldsRhs[j].get(rhs))){
                         return false;
                     }
                 }
