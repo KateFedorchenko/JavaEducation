@@ -24,7 +24,8 @@ public class ReflectionUtils {
     /**
      * Compares two Objects based on the following principals:
      * 1) both Objects come from the same class OR
-     * 2) both Objects come from different classes, but they have the fields of the same types (and values) which are put in the same order. The names of fields to be ignored.
+     * 2) both Objects come from different classes, but they have the fields of the same types (and values)
+     * which are put in the same order. The names of fields to be ignored.
      *
      * @param lhs - left Object
      * @param rhs - right Object
@@ -38,21 +39,24 @@ public class ReflectionUtils {
             return false;
         }
         if (lhs.getClass() == rhs.getClass()) {
-            return true;
+            return lhs.equals(rhs);
         }
         Class<?> lhsClass = lhs.getClass();
-        Field[] declaredFieldsLhs = lhsClass.getDeclaredFields();
+        Field[] lFields = lhsClass.getDeclaredFields();
         Class<?> rhsClass = rhs.getClass();
-        Field[] declaredFieldsRhs = rhsClass.getDeclaredFields();
-        if (declaredFieldsRhs.length != declaredFieldsLhs.length) {
+        Field[] rFields = rhsClass.getDeclaredFields();
+        if (rFields.length != lFields.length) {
             return false;
         }
         try {
-            for (int i = 0; i < declaredFieldsLhs.length; i++) {
-                for (int j = 0; j < declaredFieldsRhs.length; j++) {
-                    if(!declaredFieldsLhs[i].get(lhs).equals(declaredFieldsRhs[j].get(rhs))){
-                        return false;
-                    }
+            for (int i = 0; i < lFields.length; i++) {
+                if(lFields[i].getType() != rFields[i].getType()){
+                    return false;
+                }
+            }
+            for (int i = 0; i < lFields.length; i++) {
+                if(!lFields[i].get(lhs).equals(rFields[i].get(rhs))){
+                    return false;
                 }
             }
         } catch (IllegalAccessException e) {

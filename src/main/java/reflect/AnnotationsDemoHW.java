@@ -23,7 +23,7 @@ public class AnnotationsDemoHW {
     }
 
     public static void main(String[] args) {
-        FirstData object1 = new FirstData(2,"baskett");
+        FirstData object1 = new FirstData(2,"basket");
         FirstData object2 = new FirstData(234,"bloopers");
         SecondData object3 = new SecondData(2,"basket");
         ThirdData object4 = new ThirdData("basket", 2,3);
