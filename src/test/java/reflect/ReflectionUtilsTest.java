@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReflectionUtilsTest {
     @ParameterizedTest
-    @MethodSource("dataGenerator")
+    @MethodSource("dataGenerator")      // actually value = "dataGenerator"
     void test(Object lhs, Object rhs, boolean expected) {
         boolean actual = ReflectionUtils.equals(lhs, rhs);
         assertEquals(expected, actual);
