@@ -1,6 +1,10 @@
 package reflect;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.Arrays;
+
+import static java.util.Objects.deepEquals;
 
 public class ReflectionUtils {
 
@@ -35,12 +39,18 @@ public class ReflectionUtils {
         if (lhs == null && rhs == null) {
             return true;
         }
-        if(lhs == null || rhs == null){
+        if (lhs == null || rhs == null) {
             return false;
         }
         if (lhs.getClass() == rhs.getClass()) {
             return lhs.equals(rhs);
         }
+
+        if (lhs.equals(int[].class) && rhs.equals(int[].class)) {
+            //TODO
+            // Is it needed?
+        }
+
         Class<?> lhsClass = lhs.getClass();
         Field[] lFields = lhsClass.getDeclaredFields();
         Class<?> rhsClass = rhs.getClass();
@@ -50,12 +60,27 @@ public class ReflectionUtils {
         }
         try {
             for (int i = 0; i < lFields.length; i++) {
-                if(lFields[i].getType() != rFields[i].getType()){
+                if (lFields[i].getType() != rFields[i].getType()) {
                     return false;
                 }
             }
+
+            //TODO
             for (int i = 0; i < lFields.length; i++) {
-                if(!lFields[i].get(lhs).equals(rFields[i].get(rhs))){
+                if (lFields[i].getType().isArray()) {                                  // getComponentType() ?
+                    //TODO
+                    // How to make it right?
+//                    int length = (int) lFields[i];
+//                    int j = 0;
+//                    while (j < length) {
+//                        if (!deepEquals(Array.get(lFields[i], j++), Array.get(rFields[i], j++))) {
+//                            return false;
+//                        }
+//                    }
+                }
+            }
+            for (int i = 0; i < lFields.length; i++) {
+                if (!lFields[i].get(lhs).equals(rFields[i].get(rhs))) {
                     return false;
                 }
             }
