@@ -70,7 +70,8 @@ public class ReflectionUtils {
                 if (lFields[i].getType().isArray()) {                                  // getComponentType() ?
                     //TODO
                     // How to make it right?
-//                    int length = (int) lFields[i];
+//                    Object[] o = (Object[]) lFields[i];
+//                    int length = o.length;
 //                    int j = 0;
 //                    while (j < length) {
 //                        if (!deepEquals(Array.get(lFields[i], j++), Array.get(rFields[i], j++))) {
