@@ -1,5 +1,6 @@
 package json;
 
+import java.time.LocalDate;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -14,7 +15,6 @@ public class JsonSimpleDemo {
         }
         """;
 
-
     public static void main(String[] args) throws ParseException {
         JSONParser parser = new JSONParser();
 
@@ -25,7 +25,5 @@ public class JsonSimpleDemo {
         object.put("surname", "Ivanov");
 
         System.out.println(object.toJSONString());
-
-
     }
 }
