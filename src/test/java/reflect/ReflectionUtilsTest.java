@@ -19,7 +19,7 @@ class ReflectionUtilsTest {
         assertEquals(expected, actual);
     }
 
-    public static Stream<Arguments> dataGenerator() {           // 1) Is it ok to use here [in test] extra classes?
+    public static Stream<Arguments> dataGenerator() {
         @AllArgsConstructor
         class FirstData {
             int x;
@@ -62,6 +62,7 @@ class ReflectionUtilsTest {
                 Arguments.of(12.01, 12, false),
                 Arguments.of(new int[]{1}, 1, false),
                 Arguments.of(new int[]{1,2,3}, new int[]{1,2,3}, true),
+                Arguments.of(new int[][]{{1},{1,2,3}}, new int[][]{{1},{1,2,3}}, true),
                 Arguments.of(new int[]{0}, new int[]{0,0}, false),
                 Arguments.of(new String[]{"foo"}, new String[]{"foo"}, true),
                 Arguments.of(new String[]{"foo","bar"}, new String[]{"bar","foo"}, false),
