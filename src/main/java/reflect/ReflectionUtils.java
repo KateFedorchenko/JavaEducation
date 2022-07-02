@@ -2,9 +2,6 @@ package reflect;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-
-import static java.util.Objects.deepEquals;
 
 public class ReflectionUtils {
 
@@ -43,14 +40,21 @@ public class ReflectionUtils {
             return false;
         }
         if (lhs.getClass() == rhs.getClass()) {
+            if (lhs.getClass().isArray()) {
+                int lhsSize = Array.getLength(lhs);
+                int rhsSize = Array.getLength(rhs);
+                if (lhsSize != rhsSize) {
+                    return false;
+                }
+                for (int i = 0; i < lhsSize; i++) {
+                    if (!ReflectionUtils.equals(Array.get(lhs, i), Array.get(rhs, i))) {     //null.equals() -> NullPointerExc
+                        return false;
+                    }
+                }
+                return true;
+            }
             return lhs.equals(rhs);
         }
-
-        if (lhs.equals(int[].class) && rhs.equals(int[].class)) {
-            //TODO
-            // Is it needed?
-        }
-
         Class<?> lhsClass = lhs.getClass();
         Field[] lFields = lhsClass.getDeclaredFields();
         Class<?> rhsClass = rhs.getClass();
@@ -62,22 +66,6 @@ public class ReflectionUtils {
             for (int i = 0; i < lFields.length; i++) {
                 if (lFields[i].getType() != rFields[i].getType()) {
                     return false;
-                }
-            }
-
-            //TODO
-            for (int i = 0; i < lFields.length; i++) {
-                if (lFields[i].getType().isArray()) {                                  // getComponentType() ?
-                    //TODO
-                    // How to make it right?
-//                    Object[] o = (Object[]) lFields[i];
-//                    int length = o.length;
-//                    int j = 0;
-//                    while (j < length) {
-//                        if (!deepEquals(Array.get(lFields[i], j++), Array.get(rFields[i], j++))) {
-//                            return false;
-//                        }
-//                    }
                 }
             }
             for (int i = 0; i < lFields.length; i++) {
