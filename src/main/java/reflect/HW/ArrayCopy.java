@@ -26,6 +26,13 @@ public class ArrayCopy {
     }
 
     public static void main(String[] args) {
+        String[] str = {"foo"};
+        String[] newStr = copy(str);
+        System.out.println("Before -> str = " + Arrays.toString(str));
+        str[0] = "bar";
+        System.out.println("After -> str = " + Arrays.toString(str));
+        System.out.println("newStr = " + Arrays.toString(newStr));
+
         int[] oldArr = {1,2};
 //        int[] newArr = (int[])copy(oldArr);       ????
 
