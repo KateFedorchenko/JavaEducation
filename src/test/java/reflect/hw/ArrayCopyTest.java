@@ -1,36 +1,39 @@
 package reflect.hw;
 
-import org.junit.jupiter.api.Test;
+import java.util.stream.Stream;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class ArrayCopyTest {
-    static class Data {
-        int x = 42;
+//    @ParameterizedTest
+//    @MethodSource
+//    public void shouldCopyIntegerArray(int[] object, int[] expectedAnswer) {
+//        int[] actualAnswer = ArrayCopy.copy(object);
+//        assertEquals(expectedAnswer, actualAnswer);
+//    }
 
-        public Data(int x) {
-            this.x = x;
-        }
-
-        /**
-         * Contains deep-copy logic.
-         */
-        Data copy() {
-            return new Data(x);
-        }
+    @ParameterizedTest
+    @MethodSource
+    public void shouldCopyStringArray(String[] object, String[] expectedAnswer) {
+        String[] actualAnswer = ArrayCopy.copy(object);
+        assertEquals(expectedAnswer, actualAnswer);
     }
-    @Test
-    void test() {
-        Data[] arr1 = new Data[]{new Data(42), new Data(111)};
-        Data[] arr2 = new Data[arr1.length];
 
-        for (int i = 0; i < arr1.length; i++) {
-            arr2[i] = arr1[i];
-        }
-
-        arr1[0].x = 43;
-
-        assert arr2[0].x == 43;
+    public static Stream<Arguments> shouldCopyStringArray() {
+        return Stream.of(
+                arguments(new String[]{"foo","bar"},new String[]{"foo","bar"})
+        );
     }
+
+    public static Stream<Arguments> shouldCopyIntegerArray() {
+        return Stream.of(
+                arguments(new int[]{1,2},new int[]{1,2})
+        );
+    }
+
 
 }
