@@ -1,6 +1,9 @@
 package java8;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
@@ -30,6 +33,25 @@ public class LambdaHW {
         UnaryOperator<Double> sqrRoot = x -> Math.sqrt(x);
         Function<String,Double> result = bigDecimalWrapper.andThen(powOperation).andThen(toDouble).andThen(sqrRoot);
         System.out.println(result.apply("2"));
+
+        /**
+         * Function executes time of Runnable performance
+         */
+//        Runnable r = () -> System.out.println("hello");
+
+        Runnable r = () -> {
+            BigInteger bigInteger = new BigInteger("1");
+            for (int i = 0; i < 1000000000; i++) {
+                bigInteger.pow(i);
+            }
+        };
+
+        BinaryOperator<Long> binaryOperator = (stopTime,startTime) -> {return stopTime - startTime;};
+        long startTime = System.nanoTime();
+        r.run();
+        long stopTime = System.nanoTime();
+        System.out.println(binaryOperator.apply(stopTime,startTime));
+
     }
 }
 //1) composite function to me made which can take String and transfer it to BigDecimal
