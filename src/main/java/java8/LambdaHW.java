@@ -2,10 +2,8 @@ package java8;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
+import java.util.Arrays;
+import java.util.function.*;
 
 public class LambdaHW {
     public static interface SAMExample {
@@ -27,11 +25,11 @@ public class LambdaHW {
         /**
          * Composite function example
          */
-        Function<String,BigDecimal> bigDecimalWrapper = str -> new BigDecimal(str);
+        Function<String, BigDecimal> bigDecimalWrapper = str -> new BigDecimal(str);
         UnaryOperator<BigDecimal> powOperation = x -> x.pow(3);
-        Function<BigDecimal,Double> toDouble = x -> x.doubleValue();
+        Function<BigDecimal, Double> toDouble = x -> x.doubleValue();
         UnaryOperator<Double> sqrRoot = x -> Math.sqrt(x);
-        Function<String,Double> result = bigDecimalWrapper.andThen(powOperation).andThen(toDouble).andThen(sqrRoot);
+        Function<String, Double> result = bigDecimalWrapper.andThen(powOperation).andThen(toDouble).andThen(sqrRoot);
         System.out.println(result.apply("2"));
 
         /**
@@ -39,19 +37,22 @@ public class LambdaHW {
          */
 //        Runnable r = () -> System.out.println("hello");
 
-        Runnable r = () -> {
-            BigInteger bigInteger = new BigInteger("1");
-            for (int i = 0; i < 1000000000; i++) {
-                bigInteger.pow(i);
-            }
-        };
+//        Runnable r = () -> {
+//            BigInteger bigInteger = new BigInteger("1");
+//            for (int i = 0; i < 1000000000; i++) {
+//                bigInteger.pow(i);
+//            }
+//        };
 
-        BinaryOperator<Long> binaryOperator = (stopTime,startTime) -> {return stopTime - startTime;};
+        int[] arr = new int[]{1, 2, 3, 7, 2, 9, 2, 99, 10};
+        measureTime(() -> Arrays.sort(arr));
+    }
+
+    public static void measureTime(Runnable r) {
         long startTime = System.nanoTime();
         r.run();
         long stopTime = System.nanoTime();
-        System.out.println(binaryOperator.apply(stopTime,startTime));
-
+        System.out.println("The execution took " + (stopTime - startTime) + " nanoseconds");
     }
 }
 //1) composite function to me made which can take String and transfer it to BigDecimal
