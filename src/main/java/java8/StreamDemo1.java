@@ -56,10 +56,4 @@ public class StreamDemo1 {
     }
 }
 
-// 1) Stream API -> forEach as terminate operation TODO: [1,2,3,n]
-//  .convert HEXADECIMAL String => Integer || String method
-//  .filter all Strings which start with 0 - 9.
-// sout forEach
 
-// 2) BirthDays -> TODO: [LocalDate,n]
-// .count how many of them are on weekends
