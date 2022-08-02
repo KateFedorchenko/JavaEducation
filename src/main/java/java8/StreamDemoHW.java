@@ -38,10 +38,6 @@ public class StreamDemoHW {
 
         /**
          * To sum all even numbers from 1 to 1_000_000.
-         * Доп задание:
-         * Нужно посчитать сумму всех четных чисел от 1 до 1_000_000.
-         * Для создания соответствующего стрима используй IntStream.rangeClosed(int, int).
-         * Обрати внимания, что у IntStream  есть доп терминальные методы
          */
         long sum = IntStream.range(1, 1_000_000)
                 .filter(x -> x % 2 == 0)
