@@ -18,9 +18,10 @@ public class StreamDemoHW {
         list.stream()
                 .forEach(x -> listArr.add(Integer.toHexString(x)));
         listArr.stream()
-                .filter(x -> x.startsWith("0") || x.startsWith("1") || x.startsWith("2")
-                        || x.startsWith("3") || x.startsWith("4") || x.startsWith("5")
-                        || x.startsWith("6") || x.startsWith("7") || x.startsWith("8") || x.startsWith("9"))
+//                .filter(x -> x.startsWith("0") || x.startsWith("1") || x.startsWith("2")
+//                        || x.startsWith("3") || x.startsWith("4") || x.startsWith("5")
+//                        || x.startsWith("6") || x.startsWith("7") || x.startsWith("8") || x.startsWith("9"))
+                .filter(x -> x.charAt(0) >= '0' && x.charAt(0) <= '9')
                 .forEach(System.out::println);
 
         /**
