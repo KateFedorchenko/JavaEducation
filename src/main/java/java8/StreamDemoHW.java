@@ -39,7 +39,7 @@ public class StreamDemoHW {
         /**
          * To sum all even numbers from 1 to 1_000_000.
          */
-        long sum = IntStream.range(1, 1_000_000)
+        long sum = IntStream.rangeClosed(1, 1_000_000)
                 .filter(x -> x % 2 == 0)
                 .sum();
         System.out.println(sum);
