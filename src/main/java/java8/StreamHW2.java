@@ -6,6 +6,9 @@ public class StreamHW2 {
      * 2. Using random generator generate 1000 numbers and collect all generated numbers without first 100;
      * 3. Using random generator print to console all numbers in DESCENDING order
      * 3*.Using random generator print to console all numbers in DESCENDING of its absolute value
+     * 4. Given list of Strings collect them into Map<Character, List<String>> where key is lowercase first letter of String.
+     *      e.g. [foo, bar, few, boo, xyz] -> {f=[foo,few], b=[bar,boo], x=[xyz]}.
+     * 4*. Like previous, but make resulting lists in ascending order and without duplicates.
      */
 
     static boolean isPrime(int x) {
