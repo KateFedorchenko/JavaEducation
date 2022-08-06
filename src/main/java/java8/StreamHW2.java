@@ -18,5 +18,9 @@ public class StreamHW2 {
     }
 
     public static void main(String[] args) {
+        /**
+         * Collect to List<Integer> all prime numbers between 1 and 1_000_000
+         */
+
     }
 }
