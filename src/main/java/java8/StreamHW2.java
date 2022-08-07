@@ -5,17 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StreamHW2 {
-    /*
-     * 1. Collect to List<Integer> all prime numbers between 1 and 1_000_000
-     * 2. Using random generator generate 1000 numbers and collect all generated numbers without first 100;
-     * 3. Using random generator print to console all numbers in DESCENDING order
-     * 3*.Using random generator print to console all numbers in DESCENDING of its absolute value
-     * 4. Given list of Strings collect them into Map<Character, List<String>> where key is lowercase first letter of String.
-     *      e.g. [foo, bar, few, boo, xyz] -> {f=[foo,few], b=[bar,boo], x=[xyz]}.
-     * 4*. Like previous, but make resulting lists in ascending order and without duplicates.
-     */
-
-
     static boolean isPrime(int x) {
         for (int i = 2; i * i <= x; i++) {
             if (x % i == 0)
@@ -25,7 +14,11 @@ public class StreamHW2 {
     }
 
     public static void main(String[] args) {
+//        int x = 0 - Integer.MIN_VALUE;// variable overflow
+//        System.out.println(x);
+//        printRandomNumbersDESCAbsoluteValues2();
 
+        createHMByGroupingKeysDESCAndDistinctValues();
     }
 
 
@@ -33,10 +26,11 @@ public class StreamHW2 {
      * Collect to List<Integer> all prime numbers between 1 and 1_000_000
      */
     private static void addToListPrimeNumbers() {
-        List<Integer> integerList = new ArrayList<>();
-        IntStream.rangeClosed(1, 1_000_000)
-                .filter(x -> isPrime(x))
-                .forEach(x -> integerList.add(x));
+        List<Integer> integerList;
+        integerList = IntStream.rangeClosed(1, 1_000_000)
+                .filter(StreamHW2::isPrime)
+                .boxed()
+                .collect(Collectors.toList());
         System.out.println(integerList);
     }
 
@@ -58,14 +52,12 @@ public class StreamHW2 {
      */
     private static void printRandomNumbersDESC() {
         Random random = new Random();
-        List<Integer> randomInts = new ArrayList<>();
-        random.ints()
+        List<Integer> collect = random.ints()
                 .limit(10)
-                .forEach(x -> randomInts.add(x));
-        List<Integer> sortedListDESC = randomInts.stream()
-                .sorted(Collections.reverseOrder())
+                .boxed()
+                .sorted(Comparator.<Integer>naturalOrder().reversed())
                 .collect(Collectors.toList());
-        System.out.println(sortedListDESC);
+        System.out.println(collect);
     }
 
     /**
@@ -73,17 +65,22 @@ public class StreamHW2 {
      */
     private static void printRandomNumbersDESCAbsoluteValues() {
         Random random = new Random();
-        List<Integer> randomInts = new ArrayList<>();
-        random.ints()
+        List<Integer> collect = random.ints()
                 .limit(10)
-                .forEach(x -> randomInts.add(x));
-        System.out.println(randomInts);
-//        List<Integer> randomInts = new ArrayList<>((Arrays.asList(1,2,-5,0,4,3,-20)));
-        List<Integer> sortedListDESC = randomInts.stream()
-//                .sorted(Comparator.comparingInt(Math::abs).reversed())
+                .boxed()
+                .sorted(Comparator.comparingInt((Integer x) -> Math.abs(x)).reversed())
                 .collect(Collectors.toList());
-        System.out.println(sortedListDESC);
-    }       // Problem here
+        System.out.println(collect);
+    }
+
+    private static void printRandomNumbersDESCAbsoluteValues2() {
+        Random random = new Random();
+        List<Integer> collect = random.ints()
+                .limit(10).boxed()
+                .sorted((lhs, rhs) -> Integer.compare(Math.abs(rhs), Math.abs(lhs)))
+                .collect(Collectors.toList());
+        System.out.println(collect);
+    }
 
     /**
      * Given list of Strings collect them into Map<Character, List<String>> where key is lowercase first letter of String.
@@ -102,21 +99,12 @@ public class StreamHW2 {
      * Make resulting lists in ascending order and without duplicates.
      */
     private static void createHMByGroupingKeysDESCAndDistinctValues() {
-        List<String> stringList = new ArrayList<>(List.of("foo", "foo", "bar", "few", "boo", "xyz"));
-        List<String> distinctList = stringList.stream()
+        List<String> stringList = new ArrayList<>(List.of("foo", "Foo", "foo", "Bar", "few", "boo", "xyz"));
+        Map<Character, List<String>> collect = stringList.stream()
+                .sorted()
                 .distinct()
-                .collect(Collectors.toList());
-
-        Map<Character, List<String>> characterListMap = distinctList.stream()
                 .collect(Collectors.groupingBy(d -> d.toLowerCase().charAt(0)));
-        System.out.println(characterListMap);
-
-        LinkedHashMap<Character, List<String>> sortedMap = new LinkedHashMap<>();
-        characterListMap.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
-                .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
-        System.out.println(sortedMap);
-    }   // ok?
+        System.out.println(collect);
+    }
 
 }
